@@ -11,11 +11,25 @@ export class TwaComponent {
   protected count = 0
 
   constructor() {
-    WebApp.ready();
+    WebApp.ready()
   }
 
-  onClick() {
+  showAlert() {
     WebApp.showAlert(`Hello World! Current count is ${this.count}`)
+  }
+
+  showPopup() {
+    WebApp.showPopup({
+      title: `Title`,
+      message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae debitis deleniti dignissimos dolore dolorem earum expedita facilis ipsa iure labore, laudantium libero natus odio officiis perferendis praesentium quas quasi suscipit.',
+      buttons: [
+        {type: "default", text: "Default btn"},
+        {type: "destructive", text: "destructive btn"},
+        {type: "ok"},
+        {type: "close"},
+        {type: "cancel"},
+      ]
+    })
   }
   increment() {
     this.count += 1

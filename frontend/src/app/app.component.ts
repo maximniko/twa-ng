@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {TwaComponent} from "./modules/twa/twa.component";
+import { TwaComponent } from "./modules/twa/twa.component";
 
 @Component({
   selector: 'app-root',
