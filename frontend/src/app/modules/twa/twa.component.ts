@@ -10,6 +10,22 @@ import WebApp from "@twa-dev/sdk";
 export class TwaComponent implements OnInit {
   protected count = 0
 
+  toggleSettingsButton() {
+    if (WebApp.SettingsButton.isVisible) {
+      WebApp.SettingsButton.hide()
+    } else {
+      WebApp.SettingsButton.show()
+    }
+  }
+
+  toggleBackButton() {
+    if (WebApp.BackButton.isVisible) {
+      WebApp.BackButton.hide()
+    } else {
+      WebApp.BackButton.show()
+    }
+  }
+
   showAlert(message: string, callback?: () => unknown) {
     WebApp.showAlert(message, callback)
   }
@@ -59,6 +75,4 @@ export class TwaComponent implements OnInit {
   expand(): void {
     WebApp.expand()
   }
-
-  protected readonly print = print;
 }
