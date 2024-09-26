@@ -1,3 +1,26 @@
 <button class="tg-btn" (click)='increment()'>{{count}}</button>
-<button class="tg-btn" (click)='showAlert()'>Show Alert</button>
+<button class="tg-btn" (click)='showAlert("Alert Content")'>Show Alert</button>
 <button class="tg-btn" (click)='showPopup()'>Show Popup</button>
+<div style="text-align:center;">
+  <a href="https://ton.org/">Ton.org</a>
+</div>
+<h1>Modals</h1>
+<button (click)="showAlert('Hello World!');">Launch Alert</button>
+<button (click)="showPopup();">Launch Popup</button>
+
+<h1>Links</h1>
+<ul>
+  <li>
+    <span (click)="openTelegramLink('https://t.me/trendingapps');">Open link within Telegram</span>
+  </li>
+  <li>
+    <span (click)="openLink('https://ton.org/');">Open link in external browser</span>
+  </li>
+  <li>
+    <span (click)="openLink('https://telegra.ph/api',{try_instant_view:true});">Open link inside Telegram webview</span>
+  </li>
+</ul>
+
+<h1>Buttons</h1>
+<button (click)="expand();">Expand Webview</button>
+<button (click)="toggleMainButton()">Toggle Main Button</button>
