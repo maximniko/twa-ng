@@ -20,14 +20,12 @@ export class TwaComponent {
 
   showPopup() {
     WebApp.showPopup({
-      title: `Title`,
+      title: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.`,
       message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae debitis deleniti dignissimos dolore dolorem earum expedita facilis ipsa iure labore, laudantium libero natus odio officiis perferendis praesentium quas quasi suscipit.',
       buttons: [
         {type: "default", text: "Default btn"},
         {type: "destructive", text: "destructive btn"},
         {type: "ok"},
-        {type: "close"},
-        {type: "cancel"},
       ]
     })
   }
