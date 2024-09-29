@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from "@angular/router";
-import {Category} from "../../../domains/categories/interfaces/category";
 import {symbols} from "../../../../../common/components/symbols/symbols";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {routeCreator} from "../../../my-money.routes";
+import {CategoryFormComponent} from "../_form/category-form.component";
+import {Category} from "../../../domains/categories/interfaces/category";
 
 @Component({
-  selector: 'my-money-category-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
-  templateUrl: './detail.component.html',
+  imports: [CommonModule, RouterLink, RouterLinkActive, CategoryFormComponent],
+  templateUrl: './edit.component.html',
 })
-export class DetailComponent implements OnInit {
+export class EditComponent implements OnInit {
   categoryItem?: Category | undefined
 
   constructor(
@@ -23,11 +23,14 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
     this.activatedRoute.data
       .subscribe((data: any) => this.categoryItem = data.categoryItem)
-    this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
+  }
+
+  onCategory(category: Category) {
+    this.router.navigateByUrl(routeCreator.categoryViewId(category))
   }
 
   protected readonly symbols = symbols;
-  protected readonly routeCreator = routeCreator;
 }

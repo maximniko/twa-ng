@@ -7,33 +7,60 @@ const ROUTE_PARTS = {
   main: 'main',
   categories: 'categories',
   transactions: 'transactions',
-  view: 'view',
+  settings: 'settings',
 }
 
 export const routeCreator = {
-  myMoney: () => `/${ROUTE_PARTS.myMoney}`,
   main: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.main}`,
+  settings: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.settings}`,
   categories: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}`,
-  categoriesPage: (page: number) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}?page=${page}`,
+  categoriesAdd: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/add`,
+  categoriesEdit: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/${category.id}/edit`,
   categoryViewId: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/${category.id}`,
   transactions: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}`,
-  transactionsPage: (page: number) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}?page=${page}`,
-  transactionViewId: (id: number) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}/${ROUTE_PARTS.view}/${id}`,
+  transactionViewId: (id: number) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}/${id}`,
 }
 
 export const myMoneyRoutes: Routes = [
   {
-    path: `${ROUTE_PARTS.myMoney}`, loadComponent: () => import('./my-money.component').then(mod => mod.MyMoneyComponent),
-    data: {breadcrumb: 'My Money'},
+    path: `${ROUTE_PARTS.myMoney}`,
+    loadComponent: () => import('./my-money.component').then(mod => mod.MyMoneyComponent),
+    data: {title: 'My Money'},
     children: [
       {path: '', redirectTo: routeCreator.main(), pathMatch: 'full'},
-      {path: `${ROUTE_PARTS.main}`, loadComponent: () => import('./components/main/main.component').then(mod => mod.MainComponent)},
-      {path: `${ROUTE_PARTS.categories}`, loadComponent: () => import('./components/categories/list/list.component').then(mod => mod.ListComponent)},
       {
-        path: `${ROUTE_PARTS.categories}/${ROUTE_PARTS.view}/:categoryId`,
-        loadComponent: () => import('./components/categories/detail/detail.component').then(mod => mod.DetailComponent),
-        data: {breadcrumb: (data: any) => `${data.categoryItem.title}`},
-        resolve: {categoryItem: categoryItemResolver}
+        path: `${ROUTE_PARTS.main}`,
+        data: {title: "Main"},
+        loadComponent: () => import('./components/main/main.component').then(mod => mod.MainComponent)
+      },
+      {
+        path: `${ROUTE_PARTS.settings}`,
+        data: {title: "Settings"},
+        loadComponent: () => import('./components/settings/settings.component').then(mod => mod.SettingsComponent)
+      },
+      {
+        path: `${ROUTE_PARTS.categories}`,
+        data: {title: "Categories"},
+        loadComponent: () => import('./components/categories/list/list.component').then(mod => mod.ListComponent),
+        children: [
+          {
+            path: `add`,
+            data: {title: "Add Category"},
+            loadComponent: () => import('./components/categories/add/add.component').then(mod => mod.AddComponent)
+          },
+          {
+            path: `:categoryId`,
+            loadComponent: () => import('./components/categories/detail/detail.component').then(mod => mod.DetailComponent),
+            data: {title: (data: any) => `${data.categoryItem.title}`},
+            resolve: {categoryItem: categoryItemResolver}
+          },
+          {
+            path: `:categoryId/edit`,
+            loadComponent: () => import('./components/categories/edit/edit.component').then(mod => mod.EditComponent),
+            data: {title: (data: any) => `${data.categoryItem.title}`},
+            resolve: {categoryItem: categoryItemResolver}
+          },
+        ]
       },
     ],
   },
@@ -44,7 +71,7 @@ export const myMoneyRoutes: Routes = [
 //   {
 //     path: 'home',
 //     loadComponent: () => import('./my-money.component').then(mod => mod.MyMoneyComponent),
-//     data: {breadcrumb: 'Home'},
+//     data: {title: 'Home'},
 //     children: [
 //       {
 //         path: '',

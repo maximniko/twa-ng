@@ -1,12 +1,6 @@
-<div class="px-4 py-5 my-5 text-center">
-  <div class="d-block mx-auto mb-4">
-    <div class="bg-primary bg-gradient p-4 d-inline-block rounded-5">
-      <svg class="text-white" fill="currentColor" width="160" height="160">
-        <use [attr.xlink:href]="'#' + symbols.transparency"></use>
-      </svg>
-    </div>
-  </div>
+<section class="px-4 py-5 my-5 text-center">
   @if (categoryItem) {
-    <h1 class="display-3">{{ categoryItem?.title }}</h1>
+    <h1 class="display-3">Category name: {{ categoryItem?.title }}</h1>
+    <a [routerLink]="routeCreator.categoriesEdit(categoryItem)">Edit</a>
   }
-</div>
+</section>

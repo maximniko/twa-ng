@@ -1,59 +1,11 @@
 @import "variables";
 @import "common";
 
-//body {
-//  background: var(--tg-theme-bg-color);
-//  color: var(--tg-theme-text-color);
-//}
-//
-//.tg-secondary-bg {
-//  background: var(--tg-theme-secondary-bg-color);
-//}
-//
-//.tg-btn {
-//  background: var(--tg-theme-button-color);
-//  color: var(--tg-theme-button-text-color);
-//}
-//
-//.tg-hint {
-//  color: var(--tg-theme-hint-color);
-//}
-//
-//.tg-accent {
-//  color: var(--tg-theme-accent-text-color);
-//}
-//
-//.tg-link {
-//  color: var(--tg-theme-link-color);
-//}
-//
-//.tg-subtitle {
-//  color: var(--tg-theme-subtitle-color);
-//}
-//
-//.tg-destructive-text {
-//  color: var(--tg-theme-destructive-text-color);
-//}
-//
-//.tg-header-bg {
-//  color: var(--tg-theme-header-bg-color);
-//}
-//
-//.tg-bottom-bar-bg {
-//  color: var(--tg-theme-bottom-bar-bg-color);
-//}
-//
-//.tg-section-bg {
-//  color: var(--tg-theme-section-bg-color);
-//}
-//
-//.tg-section-header-text {
-//  color: var(--tg-theme-section-header-text-color);
-//}
-//
-//.tg-section-separator-color {
-//  color: var(--tg-theme-section-separator-color);
-//}
+header {
+  background: var(--tg-theme-header-bg-color);
+  color: var(--tg-theme-section-header-text-color);
+}
+
 body {
   --bg-color: var(--tg-theme-bg-color);
   font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif;
@@ -63,9 +15,61 @@ body {
   padding: 0;
   color-scheme: var(--tg-color-scheme);
 }
+main {
+  display: flex;
+  flex-direction: column;
+}
 
-a {
+a, .link {
   color: var(--tg-theme-link-color);
+  text-decoration: none;
+}
+
+.bg-secondary {
+  background: var(--tg-theme-secondary-bg-color);
+}
+
+.btn {
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.color-hint {
+  color: var(--tg-theme-hint-color);
+}
+
+.color-accent {
+  color: var(--tg-theme-accent-text-color);
+}
+
+.color-link {
+  color: var(--tg-theme-link-color);
+}
+
+.color-subtitle {
+  color: var(--tg-theme-subtitle-color);
+}
+
+.color-destructive-text {
+  color: var(--tg-theme-destructive-text-color);
+}
+
+.bg-bottom-bar {
+  color: var(--tg-theme-bottom-bar-bg-color);
+}
+
+.bg-section {
+  color: var(--tg-theme-section-bg-color);
+}
+
+.color-header-text {
+  color: var(--tg-theme-section-header-text-color);
+}
+
+.section-separator-color {
+  color: var(--tg-theme-section-separator-color);
 }
 #viewport {
   position: fixed;

@@ -1,10 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {Category} from "../../../domains/categories/interfaces/category";
 import {symbols} from "../../../../../common/components/symbols/symbols";
 import {CategoriesService} from "../../../domains/categories/services/categories.service";
 import {CategoriesFilter} from "../../../domains/categories/services/categories-filter";
+import {routeCreator} from "../../../my-money.routes";
+import {TwaService} from "../../../../../common/services/twa.service";
 
 @Component({
   selector: 'my-money-category-list',
@@ -15,14 +17,24 @@ import {CategoriesFilter} from "../../../domains/categories/services/categories-
 export class ListComponent implements OnInit {
   categories: Category[] = []
 
-  constructor(private categoriesService = inject(CategoriesService)) {
+  constructor(
+    private categoriesService: CategoriesService,
+    private twa: TwaService,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
     this.categoriesService.list(new CategoriesFilter({})).subscribe(
       items => this.categories = items
     )
+    this.twa.backButton(() => this.router.navigate([routeCreator.main()]))
+    this.twa.setMainButton(
+      {text: "Add Category", is_active: true, is_visible: true, has_shine_effect: true},
+      () => this.router.navigate([routeCreator.categoriesAdd()])
+    )
   }
 
   protected readonly symbols = symbols;
+  protected readonly routeCreator = routeCreator;
 }

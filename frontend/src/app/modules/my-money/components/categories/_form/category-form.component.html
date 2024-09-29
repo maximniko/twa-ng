@@ -1,0 +1,33 @@
+<form [formGroup]="categoryForm" (ngSubmit)="submit()">
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="Title" id="form-title" formControlName="title" [ngClass]="{
+            'is-invalid': isInvalidTitle,
+            'is-valid': categoryForm.valid,
+          }">
+    <label for="form-title">Name</label>
+    <div class="invalid-feedback" *ngIf="isInvalidTitle">
+      {{ validationErrors(titleErrors, 'Title') }}
+    </div>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="Icon" id="form-icon" formControlName="icon" [ngClass]="{
+            'is-invalid': isInvalidIcon,
+            'is-valid': categoryForm.valid,
+          }">
+    <label for="form-icon">Icon</label>
+    <div class="invalid-feedback" *ngIf="isInvalidIcon">
+      {{ validationErrors(iconErrors, 'Icon') }}
+    </div>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="Icon" id="form-description" formControlName="description" [ngClass]="{
+            'is-invalid': isInvalidDescription,
+            'is-valid': categoryForm.valid,
+          }">
+    <label for="form-description">Description</label>
+    <div class="invalid-feedback" *ngIf="isInvalidDescription">
+      {{ validationErrors(descriptionErrors, 'Description') }}
+    </div>
+  </div>
+  <button class="btn btn-primary w-100 py-2 my-5" type="submit" [disabled]="categoryForm.invalid">Submit</button>
+</form>

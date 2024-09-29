@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {Category} from "../interfaces/category";
+import {Category, NewCategory} from "../interfaces/category";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {CategoriesInterface} from "./categories-interface";
@@ -12,6 +12,14 @@ export class CategoriesService implements CategoriesInterface {
     private readonly httpClient: HttpClient,
     private readonly twa: TwaService = inject(TwaService),
   ) {
+  }
+
+  create(newCategory: NewCategory) {
+    return this.httpClient.post<Category>('/backend/categories/create', newCategory, {
+      headers: {
+        'Authorization': `twa ${this.twa.getInitData()}`
+      },
+    })
   }
 
   list(filter: CategoriesFilter): Observable<Category[]> {
