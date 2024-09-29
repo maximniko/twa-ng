@@ -1,8 +1,18 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
+import {provideAnimations} from "@angular/platform-browser/animations";
+import {provideClientHydration} from "@angular/platform-browser";
+import {provideHttpClient, withFetch} from "@angular/common/http";
+import {appRoutesProvider} from "./app.routes.provider";
+// import {staticPagesProviders} from "./modules/static-pages/static-pages.providers";
+import {myMoneyProviders} from "./modules/my-money/my-money.proveders";
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes)]
+  providers: [
+    provideAnimations(),
+    appRoutesProvider,
+    provideClientHydration(),
+    provideHttpClient(withFetch()),
+    // ...staticPagesProviders,
+    ...myMoneyProviders,
+  ],
 };

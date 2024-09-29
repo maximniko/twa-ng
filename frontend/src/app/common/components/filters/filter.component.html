@@ -1,0 +1,13 @@
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-filter" aria-controls="offcanvas-filter">
+  <ng-content select="[btnContent]"></ng-content>
+</button>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-filter" aria-labelledby="offcanvas-filter-label">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvas-filter-label">{{sidebarTitle}}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ng-content select="[sidebarContent]"></ng-content>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<nav aria-label="Page navigation" *ngIf="isShowPagination">
+  <ul class="pagination justify-content-center btn-group">
+    <li class="page-item" [class.disabled]="isFirstPage">
+      <button type="button" class="page-link" (click)="currentPage = (currentPage ?? 0) - 1">Предыдущая</button>
+    </li>
+    <li *ngFor="let page of getPages" class="page-item{{isCurrent(page) ? ' active' : ''}}" [attr.aria-current]="isCurrent(page) ? 'page' : null">
+      <button type="button" class="page-link" (click)="currentPage = page">{{ page }}</button>
+    </li>
+    <li class="page-item" [class.disabled]="isLastPage">
+      <button type="button" class="page-link" (click)="currentPage = (currentPage ?? 0) + 1">Следующая</button>
+    </li>
+  </ul>
+</nav>

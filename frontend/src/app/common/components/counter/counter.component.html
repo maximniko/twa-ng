@@ -1,0 +1,5 @@
+<div class="input-group" aria-label="Select tickets count">
+  <button class="btn btn-secondary" [ngClass]="{'disabled': !canDecrement()}" (click)="decrement()">-</button>
+  <input type="text" [value]="value()" class="text-center text-secondary form-control">
+  <button class="btn btn-secondary" [ngClass]="{'disabled': !canIncrement()}" (click)="increment()">+</button>
+</div>

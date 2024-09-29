@@ -1,0 +1,68 @@
+<div class="px-4 py-5 my-5 text-center">
+  <div class="d-block mx-auto mb-4">
+    <div class="bg-primary bg-gradient p-4 d-inline-block rounded-5">
+      <svg class="text-white" fill="currentColor" width="160" height="160">
+        <use [attr.xlink:href]="'#' + symbols.transparency"></use>
+      </svg>
+    </div>
+  </div>
+  <h1 class="display-3">Главное событие</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Удобный инструмент для связи между артистами и организаторами мероприятий. Мы создаем удобную и эффективную среду для поиска и организации выступлений.</p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Организатор событий</button>
+      <button type="button" class="btn btn-outline-primary btn-lg px-4">Исполнитель</button>
+    </div>
+  </div>
+</div>
+<div class="b-example-divider"></div>
+<div class="container px-4 py-5">
+  <h2 class="pb-2 border-bottom">Почему с нами удобно работать?</h2>
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 text-center">
+    <div class="feature col">
+      <div class="feature-icon bg-primary bg-gradient">
+        <svg class="bi" width="1em" height="1em">
+          <use [attr.xlink:href]="'#' + symbols.collection"></use>
+        </svg>
+      </div>
+      <h2>Исполнителям</h2>
+      <div>
+        <p>Находите места для выступлений, представьте свой талант новой аудитории, управляйте вашим расписанием</p>
+      </div>
+      <a routerLink="/home/auth/sign-up" fragment="executor" class="icon-link">
+        Присоединиться как исполнитель
+        <svg class="bi" width="1em" height="1em">
+          <use [attr.xlink:href]="'#' + symbols.chevronRight"></use>
+        </svg>
+      </a>
+    </div>
+    <div class="feature col">
+      <div class="feature-icon bg-primary bg-gradient">
+        <svg class="bi" width="1em" height="1em">
+          <use [attr.xlink:href]="'#' + symbols.peopleCircle"></use>
+        </svg>
+      </div>
+      <h2>Организаторам</h2>
+      <p>Находите талантливых артистов, организуйте незабываемые мероприятия, найдите идеального артиста для вашего события</p>
+      <a routerLink="/home/auth/sign-up" fragment="organizer" class="icon-link">
+        Присоединиться как организатор
+        <svg class="bi" width="1em" height="1em"><use [attr.xlink:href]="'#' + symbols.chevronRight"></use></svg>
+      </a>
+    </div>
+    <div class="feature col">
+      <div class="feature-icon bg-primary bg-gradient">
+        <svg class="bi" width="1em" height="1em">
+          <use [attr.xlink:href]="'#' + symbols.toggles2"></use>
+        </svg>
+      </div>
+      <h2>Посетителям</h2>
+      <p>Находите интересные места, проводите хорошо время, находите новых друзей</p>
+      <a routerLink="/home/auth/sign-up" fragment="visitor" class="icon-link">
+        Выбрать событие
+        <svg class="bi" width="1em" height="1em">
+          <use [attr.xlink:href]="'#' + symbols.chevronRight"></use>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

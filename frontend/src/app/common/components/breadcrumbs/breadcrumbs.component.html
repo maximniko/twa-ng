@@ -1,0 +1,16 @@
+@if(show) {
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      @for (breadcrumb of (breadcrumbs$ | async); track breadcrumbs$;) {
+        <li class="breadcrumb-item">
+          @if ($last) {
+            <span>{{ breadcrumb.title }}</span>
+          } @else {
+            <a [href]="breadcrumb.link">{{ breadcrumb.title }}</a>
+          }
+        </li>
+      }
+    </ol>
+  </nav>
+}
+
