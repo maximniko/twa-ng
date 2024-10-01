@@ -1,6 +1,4 @@
-<section class="px-4 py-5 my-5 text-center">
-  @if (categoryItem) {
-    <h1 class="display-3">Category name: {{ categoryItem?.title }}</h1>
-    <a [routerLink]="routeCreator.categoriesEdit(categoryItem)">Edit</a>
-  }
+<section class="px-4 py-5 my-5 text-center" *ngIf="categoryItem">
+  <h1 class="display-3">Category name: {{ categoryItem.title }}</h1>
+  <a [routerLink]="routeCreator.categoriesEdit(categoryItem)">Edit</a>
 </section>

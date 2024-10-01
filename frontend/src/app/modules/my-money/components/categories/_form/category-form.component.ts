@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {ReactiveForm} from "../../../../../common/components/reactive-form.component";
 import {CategoriesService} from "../../../domains/categories/services/categories.service";
@@ -13,7 +13,7 @@ import {InValidator} from "../../../../../common/extensions/Validators";
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './category-form.component.html',
 })
-export class CategoryFormComponent extends ReactiveForm {
+export class CategoryFormComponent extends ReactiveForm implements OnInit {
 
   @Output() category = new EventEmitter<Category>
   @Input() categoryItem?: Category | undefined
@@ -25,21 +25,23 @@ export class CategoryFormComponent extends ReactiveForm {
     super();
   }
 
-  protected categoryForm: FormGroup = this.formBuilder.group({
-    title: [this.categoryItem?.title ?? '', [
+  protected categoryForm: FormGroup = this.formBuilder.group({})
+
+  ngOnInit() {
+    this.categoryForm.addControl('title', this.formBuilder.control(this.categoryItem?.title ?? '', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(32),
-    ]],
-    icon: [this.categoryItem?.icon ?? '', [
+    ]))
+    this.categoryForm.addControl('icon', this.formBuilder.control(this.categoryItem?.icon ?? '', [
       Validators.required,
       InValidator(["build"])
-    ]],
-    description: [this.categoryItem?.description ?? '', [
+    ]))
+    this.categoryForm.addControl('description', this.formBuilder.control(this.categoryItem?.description ?? '', [
       Validators.minLength(3),
       Validators.maxLength(255),
-    ]],
-  })
+    ]))
+  }
 
   private get title() {
     return this.categoryForm.get('title');

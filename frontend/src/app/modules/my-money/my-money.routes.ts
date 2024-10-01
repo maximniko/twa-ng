@@ -15,8 +15,8 @@ export const routeCreator = {
   settings: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.settings}`,
   categories: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}`,
   categoriesAdd: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/add`,
-  categoriesEdit: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/${category.id}/edit`,
   categoryViewId: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/${category.id}`,
+  categoriesEdit: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/${category.id}/edit`,
   transactions: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}`,
   transactionViewId: (id: number) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}/${id}`,
 }
@@ -42,25 +42,23 @@ export const myMoneyRoutes: Routes = [
         path: `${ROUTE_PARTS.categories}`,
         data: {title: "Categories"},
         loadComponent: () => import('./components/categories/list/list.component').then(mod => mod.ListComponent),
-        children: [
-          {
-            path: `add`,
-            data: {title: "Add Category"},
-            loadComponent: () => import('./components/categories/add/add.component').then(mod => mod.AddComponent)
-          },
-          {
-            path: `:categoryId`,
-            loadComponent: () => import('./components/categories/detail/detail.component').then(mod => mod.DetailComponent),
-            data: {title: (data: any) => `${data.categoryItem.title}`},
-            resolve: {categoryItem: categoryItemResolver}
-          },
-          {
-            path: `:categoryId/edit`,
-            loadComponent: () => import('./components/categories/edit/edit.component').then(mod => mod.EditComponent),
-            data: {title: (data: any) => `${data.categoryItem.title}`},
-            resolve: {categoryItem: categoryItemResolver}
-          },
-        ]
+      },
+      {
+        path: `${ROUTE_PARTS.categories}/add`,
+        data: {title: "Add Category"},
+        loadComponent: () => import('./components/categories/add/add.component').then(mod => mod.AddComponent)
+      },
+      {
+        path: `${ROUTE_PARTS.categories}/:id`,
+        loadComponent: () => import('./components/categories/detail/detail.component').then(mod => mod.DetailComponent),
+        data: {title: (data: any) => `${data.categoryItem.title}`},
+        resolve: {categoryItem: categoryItemResolver},
+      },
+      {
+        path: `${ROUTE_PARTS.categories}/:id/edit`,
+        loadComponent: () => import('./components/categories/edit/edit.component').then(mod => mod.EditComponent),
+        data: {title: (data: any) => `${data.categoryItem.title}`},
+        resolve: {categoryItem: categoryItemResolver},
       },
     ],
   },

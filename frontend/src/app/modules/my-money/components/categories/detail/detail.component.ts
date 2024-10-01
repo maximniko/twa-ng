@@ -13,7 +13,7 @@ import {routeCreator} from "../../../my-money.routes";
   templateUrl: './detail.component.html',
 })
 export class DetailComponent implements OnInit {
-  categoryItem?: Category | undefined
+  categoryItem!: Category
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -24,7 +24,7 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data
-      .subscribe((data: any) => this.categoryItem = data.categoryItem)
+      .subscribe((data: any) => this.categoryItem = data['categoryItem'])
     this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
   }
 

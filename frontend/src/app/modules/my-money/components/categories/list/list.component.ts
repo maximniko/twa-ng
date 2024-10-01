@@ -9,7 +9,6 @@ import {routeCreator} from "../../../my-money.routes";
 import {TwaService} from "../../../../../common/services/twa.service";
 
 @Component({
-  selector: 'my-money-category-list',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './list.component.html',
