@@ -5,5 +5,9 @@ import {CategoriesFilter} from "./categories-filter";
 export interface CategoriesInterface {
   list(filter: CategoriesFilter): Observable<Category[]>
 
-  item(filter: CategoriesFilter): Observable<Category | undefined>
+  item(filter: CategoriesFilter): Observable<Category|undefined>
+
+  create(category: Category): Observable<Category>
+
+  edit(category: Category): Observable<Category>
 }

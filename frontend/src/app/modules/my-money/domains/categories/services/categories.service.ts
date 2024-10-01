@@ -24,7 +24,7 @@ export class CategoriesService implements CategoriesInterface {
     })
   }
 
-  item(filter: CategoriesFilter): Observable<Category | undefined> {
+  item(filter: CategoriesFilter): Observable<Category> {
     return this.httpClient.get<Category>(`/backend/categories/get`, {
       params: filter.toHttpParams(),
     })

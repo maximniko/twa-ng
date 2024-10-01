@@ -25,6 +25,6 @@ export class CategoriesFilter {
     if (this.id) {
       return item.id == this.id
     }
-    return false
+    return true
   }
 }

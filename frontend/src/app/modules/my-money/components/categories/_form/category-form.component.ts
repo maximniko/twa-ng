@@ -30,9 +30,9 @@ export class CategoryFormComponent extends ReactiveForm implements OnInit {
     ]))
     this.categoryForm.addControl('icon', this.formBuilder.control(this.categoryItem?.icon ?? '', [
       Validators.required,
-      InValidator(["build"])
+      InValidator(["building"])
     ]))
-    this.categoryForm.addControl('description', this.formBuilder.control(this.categoryItem?.description ?? '', [
+    this.categoryForm.addControl('description', this.formBuilder.control(this.categoryItem?.description.slice(0, 255) ?? '', [
       Validators.minLength(3),
       Validators.maxLength(255),
     ]))
@@ -75,6 +75,6 @@ export class CategoryFormComponent extends ReactiveForm implements OnInit {
   }
 
   submit() {
-    this.onSubmit.emit(this.categoryForm.value)
+    this.onSubmit.emit(Object.assign(this.categoryItem ?? {}, this.categoryForm.value))
   }
 }

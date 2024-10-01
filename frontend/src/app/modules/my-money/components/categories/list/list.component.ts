@@ -25,7 +25,10 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.list(new CategoriesFilter({})).subscribe(
-      items => this.categories = items
+      items => {
+        console.log(items)
+        this.categories = items
+      }
     )
     this.twa.backButton(() => this.router.navigate([routeCreator.main()]))
     this.twa.setMainButton(
