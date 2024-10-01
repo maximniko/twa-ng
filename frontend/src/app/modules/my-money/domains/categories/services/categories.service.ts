@@ -1,33 +1,26 @@
-import {inject, Injectable} from '@angular/core';
-import {Category, NewCategory} from "../interfaces/category";
+import {Injectable} from '@angular/core';
+import {Category} from "../interfaces/category";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {CategoriesInterface} from "./categories-interface";
 import {CategoriesFilter} from "./categories-filter";
-import {TwaService} from "../../../../../common/services/twa.service";
 
 @Injectable({providedIn: 'root'})
 export class CategoriesService implements CategoriesInterface {
-  constructor(
-    private readonly httpClient: HttpClient,
-    private readonly twa: TwaService = inject(TwaService),
-  ) {
+  constructor(private readonly httpClient: HttpClient) {
   }
 
-  create(newCategory: NewCategory) {
-    return this.httpClient.post<Category>('/backend/categories/create', newCategory, {
-      headers: {
-        'Authorization': `twa ${this.twa.getInitData()}`
-      },
-    })
+  create(category: Category) {
+    return this.httpClient.post<Category>('/backend/categories/create', category)
+  }
+
+  edit(category: Category) {
+    return this.httpClient.patch<Category>('/backend/categories/edit', category)
   }
 
   list(filter: CategoriesFilter): Observable<Category[]> {
     return this.httpClient.get<Category[]>('/backend/categories', {
       params: filter.toHttpParams(),
-      headers: {
-        'Authorization': `twa ${this.twa.getInitData()}`
-      },
     })
   }
 

@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {ReactiveForm} from "../../../../../common/components/reactive-form.component";
-import {CategoriesService} from "../../../domains/categories/services/categories.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Category, NewCategory} from "../../../domains/categories/interfaces/category";
-import {Observable} from "rxjs";
+import {Category} from "../../../domains/categories/interfaces/category";
 import {InValidator} from "../../../../../common/extensions/Validators";
 
 @Component({
@@ -15,13 +13,10 @@ import {InValidator} from "../../../../../common/extensions/Validators";
 })
 export class CategoryFormComponent extends ReactiveForm implements OnInit {
 
-  @Output() category = new EventEmitter<Category>
+  @Output() onSubmit = new EventEmitter<Category>
   @Input() categoryItem?: Category | undefined
 
-  constructor(
-    private categoriesService: CategoriesService,
-    private formBuilder: FormBuilder,
-  ) {
+  constructor(private formBuilder: FormBuilder) {
     super();
   }
 
@@ -80,12 +75,6 @@ export class CategoryFormComponent extends ReactiveForm implements OnInit {
   }
 
   submit() {
-    this.submitNewExecutor()
-      .subscribe((category: Category) => this.category.emit(category))
-  }
-
-  private submitNewExecutor(): Observable<Category> {
-    const newCategory: NewCategory = this.categoryForm.value
-    return this.categoriesService.create(newCategory)
+    this.onSubmit.emit(this.categoryForm.value)
   }
 }

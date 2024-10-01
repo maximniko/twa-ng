@@ -1,8 +1,5 @@
-export interface Category extends NewCategory {
-  id: number
-}
-
-export interface NewCategory {
+export interface Category {
+  id?: number
   title: string
   description: string
   icon: string

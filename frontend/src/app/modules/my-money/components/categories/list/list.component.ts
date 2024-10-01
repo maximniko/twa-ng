@@ -17,14 +17,14 @@ export class ListComponent implements OnInit {
   categories: Category[] = []
 
   constructor(
-    private categoriesService: CategoriesService,
+    private service: CategoriesService,
     private twa: TwaService,
     private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    this.categoriesService.list(new CategoriesFilter({})).subscribe(
+    this.service.list(new CategoriesFilter({})).subscribe(
       items => this.categories = items
     )
     this.twa.backButton(() => this.router.navigate([routeCreator.main()]))
