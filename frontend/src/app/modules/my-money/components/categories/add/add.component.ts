@@ -5,33 +5,43 @@ import {symbols} from "../../../../../common/components/symbols/symbols";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {routeCreator} from "../../../my-money.routes";
 import {ReactiveForm} from "../../../../../common/components/reactive-form.component";
-import {CategoryFormComponent} from "../_form/category-form.component";
+import {CategoryInputsComponent} from "../_form/category-inputs.component";
 import {Category} from "../../../domains/categories/interfaces/category";
 import {CategoriesService} from "../../../domains/categories/services/categories.service";
+import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterLink,  CategoryFormComponent],
-  templateUrl: './add.component.html',
+    standalone: true,
+    imports: [CommonModule, RouterLink, CategoryInputsComponent, ReactiveFormsModule],
+    templateUrl: './add.component.html',
 })
 export class AddComponent extends ReactiveForm implements OnInit {
-  constructor(
-    private twa: TwaService,
-    private router: Router,
-    private service: CategoriesService
-  ) {
-    super();
-  }
+    constructor(
+        private twa: TwaService,
+        private router: Router,
+        private formBuilder: FormBuilder,
+        private service: CategoriesService
+    ) {
+        super();
+    }
 
-  ngOnInit() {
-    this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
-  }
+    protected categoryForm: FormGroup = this.formBuilder.group({})
 
-  onSubmit(category: Category) {
-    this.service.create(category).subscribe(
-      () => this.router.navigate([routeCreator.categories()])
-    )
-  }
+    ngOnInit() {
+        this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
+        this.twa.setMainButton({text: 'Add'}, this.submit)
+    }
 
-  protected readonly symbols = symbols;
+    submit() {
+        if (this.categoryForm.invalid) {
+            return
+        }
+
+        const newCategory: Category = this.categoryForm.value
+        this.service.create(newCategory).subscribe(
+            (category: Category) => this.router.navigate([routeCreator.categoryViewId(category)])
+        )
+    }
+
+    protected readonly symbols = symbols;
 }

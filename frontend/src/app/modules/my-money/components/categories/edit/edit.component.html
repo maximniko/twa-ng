@@ -1,4 +1,6 @@
 <section class="bg-section">
-  edit category
-  <category-form (onSubmit)="onSubmit($event)" [categoryItem]="categoryItem"></category-form>
+    <h1>Edit category</h1>
+    <form [formGroup]="categoryForm" (ngSubmit)="submit()">
+        <category-inputs [parentForm]="categoryForm"></category-inputs>
+    </form>
 </section>
