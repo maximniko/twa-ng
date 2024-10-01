@@ -1,6 +1,5 @@
 import {ValidationErrors} from "@angular/forms";
-import {Component, Input} from "@angular/core";
-import {Observable} from "rxjs";
+import {Component} from "@angular/core";
 
 @Component({template: ''})
 export abstract class ReactiveForm {
