@@ -1,10 +1,10 @@
 @if(categoryItem) {
-  <section class="bg-section">
+  <section class="section">
     <h1>Category name: {{ categoryItem.title }}</h1>
     <a [routerLink]="routeCreator.categoriesEdit(categoryItem)">Edit</a>
   </section>
 } @else {
-  <section class="bg-section">
+  <section class="section">
     <p>empty category :(</p>
   </section>
 }

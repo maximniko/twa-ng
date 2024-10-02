@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {symbols} from "../../../../../common/components/symbols/symbols";
@@ -16,6 +16,9 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 })
 export class EditComponent implements OnInit, OnDestroy {
   categoryItem!: Category
+  submited: number = 0
+
+  @ViewChild('form') formElement: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,7 +35,7 @@ export class EditComponent implements OnInit, OnDestroy {
     this.twa.backButton(() => this.router.navigate([routeCreator.categoryViewId(this.categoryItem)]))
     this.twa.setMainButton(
       {text: 'Edit', is_visible: true, is_active: true, has_shine_effect: true},
-      this.submit,
+      () => this.submit(),
     )
 
     this.activatedRoute.data
@@ -40,19 +43,20 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+    this.submited += 1
     if (this.categoryForm.invalid) {
       return
     }
 
     const newCategory: Category = this.categoryForm.value
-    this.service.edit(newCategory).subscribe(
+    this.service.edit(Object.assign(this.categoryItem, newCategory)).subscribe(
       (category: Category) => this.router.navigate([routeCreator.categoryViewId(category)])
     )
   }
 
   ngOnDestroy(): void {
     this.twa.visibleMainButton(false)
-    this.twa.setMainButtonOffClick(this.submit)
+    // this.twa.setMainButtonOffClick(this.submit)
   }
 
   protected readonly symbols = symbols;
