@@ -28,8 +28,6 @@ export class CategoryInputsComponent extends ReactiveForm implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Category item ngOnInit", this.categoryItem)
-    console.log("parent form ngOnInit", this.parentForm)
     this.parentForm.addControl('title', this.formBuilder.control(this.categoryItem?.title ?? '', [
       Validators.required,
       Validators.minLength(3),

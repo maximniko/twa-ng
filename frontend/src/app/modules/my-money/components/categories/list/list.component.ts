@@ -26,7 +26,6 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.service.list(new CategoriesFilter({})).subscribe(
       items => {
-        console.log(items)
         this.categories = items
       }
     )
