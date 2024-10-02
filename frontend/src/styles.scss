@@ -7,8 +7,7 @@ header {
 }
 
 body {
-  --bg-color: var(--tg-theme-bg-color);
-  background-color: var(--bg-color);
+  background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
   margin: 48px 24px;
   padding: 0;
@@ -43,10 +42,6 @@ a, .link {
   color: var(--tg-theme-accent-text-color);
 }
 
-.color-link {
-  color: var(--tg-theme-link-color);
-}
-
 .color-subtitle {
   color: var(--tg-theme-subtitle-color);
 }
@@ -56,11 +51,11 @@ a, .link {
 }
 
 .bg-bottom-bar {
-  color: var(--tg-theme-bottom-bar-bg-color);
+  background: var(--tg-theme-bottom-bar-bg-color);
 }
 
 .bg-section {
-  color: var(--tg-theme-section-bg-color);
+  background: var(--tg-theme-section-bg-color);
 }
 
 .color-header-text {
