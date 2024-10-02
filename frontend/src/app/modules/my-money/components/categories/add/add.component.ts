@@ -29,12 +29,12 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
-    this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, this.submit)
+    this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, () => this.submit())
   }
 
   ngOnDestroy(): void {
     this.twa.visibleMainButton(false)
-    this.twa.setMainButtonOffClick(this.submit)
+    // this.twa.setMainButtonOffClick(this.submit)
   }
 
   submit() {

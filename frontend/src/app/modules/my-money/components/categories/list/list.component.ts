@@ -32,7 +32,7 @@ export class ListComponent implements OnInit, OnDestroy {
     this.twa.backButton(() => this.router.navigate([routeCreator.main()]))
     this.twa.setMainButton(
       {text: "Add Category", is_active: true, is_visible: true, has_shine_effect: true},
-      this.onMainClick
+      () => this.onMainClick()
     )
   }
 
@@ -42,7 +42,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.twa.visibleMainButton(false)
-    this.twa.setMainButtonOffClick(this.onMainClick)
+    // this.twa.setMainButtonOffClick(this.onMainClick)
   }
 
   protected readonly symbols = symbols;

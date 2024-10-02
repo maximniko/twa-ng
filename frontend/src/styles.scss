@@ -9,11 +9,10 @@ header {
 body {
   background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
-  margin: 48px 24px;
-  padding: 0;
   color-scheme: var(--tg-color-scheme);
 }
-main {
+
+.main {
   display: flex;
   flex-direction: column;
 }
@@ -50,12 +49,15 @@ a, .link {
   color: var(--tg-theme-destructive-text-color);
 }
 
-.bg-bottom-bar {
+.footer {
   background: var(--tg-theme-bottom-bar-bg-color);
+  text-align: center;
 }
 
-.bg-section {
+.section {
   background: var(--tg-theme-section-bg-color);
+  padding: 1.5rem;
+  border-radius: .5rem;
 }
 
 .color-header-text {
@@ -64,44 +66,4 @@ a, .link {
 
 .section-separator-color {
   color: var(--tg-theme-section-separator-color);
-}
-#viewport {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: var(--tg-viewport-stable-height, 100vh);
-  pointer-events: none;
-  transition: all .2s ease;
-}
-#viewport:after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border-width: 4px;
-  border-style: solid;
-  border-image: linear-gradient(45deg, rgba(64, 224, 208, .5), rgba(173, 255, 47, .5)) 1;
-}
-
-#viewport-params-size,
-#viewport-params-expand {
-  content: attr(text);
-  position: absolute;
-  display: inline-block;
-  background: var(--tg-theme-link-color, rgb(64, 224, 208));
-  right: 4px;
-  left: auto;
-  font-size: 8px;
-  padding: 4px;
-  vertical-align: top;
-}
-#viewport-params-size {
-  top: 4px;
-}
-#viewport-params-expand {
-  top: 30px;
 }
