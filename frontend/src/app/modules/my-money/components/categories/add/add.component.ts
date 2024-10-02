@@ -34,6 +34,7 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.twa.visibleMainButton(false)
+    this.twa.setMainButtonOffClick(this.submit)
   }
 
   submit() {

@@ -27,6 +27,9 @@ export class TwaService {
     WebApp.MainButton.setParams(params)
     WebApp.MainButton.onClick(onClick)
   }
+  setMainButtonOffClick(onClick: VoidFunction) {
+    WebApp.MainButton.offClick(onClick)
+  }
 
   setSecondaryButton(params: SecondaryButton) {
     WebApp.SecondaryButton.setParams(params)

@@ -30,7 +30,10 @@ export class EditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.twa.backButton(() => this.router.navigate([routeCreator.categoryViewId(this.categoryItem)]))
-    this.twa.setMainButton({text: 'Edit', is_visible: true, is_active: true}, this.submit)
+    this.twa.setMainButton(
+      {text: 'Edit', is_visible: true, is_active: true, has_shine_effect: true},
+      this.submit,
+    )
 
     this.activatedRoute.data
       .subscribe((data: any) => this.categoryItem = data.categoryItem)
@@ -49,6 +52,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.twa.visibleMainButton(false)
+    this.twa.setMainButtonOffClick(this.submit)
   }
 
   protected readonly symbols = symbols;
