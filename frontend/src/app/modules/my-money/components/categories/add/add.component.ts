@@ -12,7 +12,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterLink, CategoryInputsComponent, ReactiveFormsModule],
+  imports: [CommonModule, CategoryInputsComponent, ReactiveFormsModule],
   templateUrl: './add.component.html',
 })
 export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
