@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {symbols} from "../../../../../common/components/symbols/symbols";
@@ -14,7 +14,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   imports: [CommonModule, RouterLink, RouterLinkActive, CategoryInputsComponent, ReactiveFormsModule],
   templateUrl: './edit.component.html',
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
   categoryItem!: Category
 
   constructor(
@@ -30,7 +30,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
-    this.twa.setMainButton({text: 'Edit'}, this.submit)
+    this.twa.setMainButton({text: 'Edit', is_visible: true, is_active: true}, this.submit)
 
     this.activatedRoute.data
       .subscribe((data: any) => this.categoryItem = data.categoryItem)
@@ -43,8 +43,12 @@ export class EditComponent implements OnInit {
 
     const newCategory: Category = this.categoryForm.value
     this.service.edit(newCategory).subscribe(
-        (category: Category) => this.router.navigate([routeCreator.categoryViewId(category)])
+      (category: Category) => this.router.navigate([routeCreator.categoryViewId(category)])
     )
+  }
+
+  ngOnDestroy(): void {
+    this.twa.visibleMainButton(false)
   }
 
   protected readonly symbols = symbols;

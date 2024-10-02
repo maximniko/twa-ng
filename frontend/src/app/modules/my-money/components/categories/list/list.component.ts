@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {Category} from "../../../domains/categories/interfaces/category";
@@ -7,7 +7,6 @@ import {CategoriesService} from "../../../domains/categories/services/categories
 import {CategoriesFilter} from "../../../domains/categories/services/categories-filter";
 import {routeCreator} from "../../../my-money.routes";
 import {TwaService} from "../../../../../common/services/twa.service";
-import * as console from "node:console";
 
 @Component({
   standalone: true,
@@ -38,10 +37,10 @@ export class ListComponent implements OnInit, OnDestroy {
     )
   }
 
+  ngOnDestroy(): void {
+    this.twa.visibleMainButton(false)
+  }
+
   protected readonly symbols = symbols;
   protected readonly routeCreator = routeCreator;
-
-  ngOnDestroy(): void {
-    this.twa.toggleMainButton()
-  }
 }

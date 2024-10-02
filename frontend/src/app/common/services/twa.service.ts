@@ -24,16 +24,16 @@ export class TwaService {
     WebApp.SecondaryButton.setParams(params)
   }
 
-  toggleSettingsButton() {
-    this._toggleButtonVisible(WebApp.SettingsButton)
+  visibleSettingsButton(show: boolean) {
+    this._buttonVisible(WebApp.SettingsButton, show)
   }
 
-  toggleSecondaryButton() {
-    this._toggleButtonVisible(WebApp.SecondaryButton)
+  visibleSecondaryButton(show: boolean) {
+    this._buttonVisible(WebApp.SecondaryButton, show)
   }
 
-  toggleBackButton() {
-    this._toggleButtonVisible(WebApp.BackButton)
+  visibleBackButton(show: boolean) {
+    this._buttonVisible(WebApp.BackButton, show)
   }
 
   backButtonShow() {
@@ -65,13 +65,18 @@ export class TwaService {
     // })
   }
 
-  toggleMainButton() {
-    this._toggleButtonVisible(WebApp.MainButton)
+  visibleMainButton(show: boolean) {
+    this._buttonVisible(WebApp.MainButton, show)
   }
 
-  private _toggleButtonVisible(button: ButtonVisible) {
-    button.isVisible ? button.hide() : button.show()
+  mainButtonIsActive(isActive: boolean) {
+    isActive ? WebApp.MainButton.enable() : WebApp.MainButton.disable()
   }
+
+  private _buttonVisible(button: ButtonVisible, show: boolean) {
+    show ? button.show() : button.hide()
+  }
+
   openLink(link: string, options?: { try_instant_view: boolean }) {
     WebApp.openLink(link, options)
   }
