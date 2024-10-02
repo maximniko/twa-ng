@@ -8,7 +8,7 @@ import {currentYear} from "../../../../../common/extensions/Functions";
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './footer.component.html',
-  host: {'class': 'footer mt-auto'}
+  host: {'class': 'footer mt-auto py-3'}
 })
 export class FooterComponent {
   protected readonly currentYear = currentYear;

@@ -27,12 +27,10 @@ export class TwaService {
     WebApp.MainButton.setParams(params)
     WebApp.MainButton.onClick(onClick)
   }
-  setMainButtonOffClick(onClick: VoidFunction) {
-    WebApp.MainButton.offClick(onClick)
-  }
 
-  setSecondaryButton(params: SecondaryButton) {
+  setSecondaryButton(params: BottomButtonParams & {position?: SecondaryButton["position"]}, onClick: VoidFunction) {
     WebApp.SecondaryButton.setParams(params)
+    WebApp.SecondaryButton.onClick(onClick)
   }
 
   visibleSettingsButton(show: boolean) {

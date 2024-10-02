@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {Category} from "../../../domains/categories/interfaces/category";
@@ -12,7 +12,7 @@ import {routeCreator} from "../../../my-money.routes";
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './detail.component.html',
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
   categoryItem!: Category
 
   constructor(
@@ -26,6 +26,19 @@ export class DetailComponent implements OnInit {
     this.activatedRoute.data
       .subscribe((data: any) => this.categoryItem = data['categoryItem'])
     this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
+    this.twa.setSecondaryButton(
+      {text: 'Edit', is_visible: true, is_active: true, position: 'right'},
+      () => this.router.navigate([routeCreator.categoriesEdit(this.categoryItem)]),
+    )
+    this.twa.setMainButton(
+      {text: 'Edit', is_visible: true, is_active: true},
+      () => this.router.navigate([routeCreator.categoriesEdit(this.categoryItem)]),
+    )
+  }
+
+  ngOnDestroy() {
+    this.twa.visibleSecondaryButton(false)
+    this.twa.visibleMainButton(false)
   }
 
   protected readonly symbols = symbols;
