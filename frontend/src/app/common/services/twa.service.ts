@@ -7,6 +7,14 @@ export class TwaService {
 
   constructor() {
     WebApp.ready();
+    WebApp.expand();
+    if (WebApp.colorScheme) {
+      document.documentElement.setAttribute('data-bs-theme', WebApp.colorScheme)
+    }
+    WebApp.onEvent("themeChanged", () => {
+      document.documentElement.setAttribute('data-bs-theme', WebApp.colorScheme)
+    })
+
     // WebApp.MainButton.onClick(() => WebApp.showAlert('Main Button was clicked'))
     // WebApp.MainButton.show()
   }
