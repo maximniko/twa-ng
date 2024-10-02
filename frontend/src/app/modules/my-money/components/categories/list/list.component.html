@@ -3,7 +3,7 @@
   @if (categories.length) {
     <ul>
       @for (category of categories; track category.id) {
-        <li><a class="color-link" [routerLink]="routeCreator.categoryViewId(category)">{{ category.title }}</a></li>
+        <li><a [routerLink]="routeCreator.categoryViewId(category)">{{ category.title }}</a></li>
       }
     </ul>
   }
