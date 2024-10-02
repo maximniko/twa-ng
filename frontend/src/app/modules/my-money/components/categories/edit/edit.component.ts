@@ -18,8 +18,6 @@ export class EditComponent implements OnInit, OnDestroy {
   categoryItem!: Category
   submited: number = 0
 
-  @ViewChild('form') formElement: any;
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private twa: TwaService,
@@ -34,7 +32,7 @@ export class EditComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.twa.backButton(() => this.router.navigate([routeCreator.categoryViewId(this.categoryItem)]))
     this.twa.setMainButton(
-      {text: 'Edit', is_visible: true, is_active: true, has_shine_effect: true},
+      {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
       () => this.submit(),
     )
 
