@@ -5,7 +5,7 @@ export interface Category {
   icon: string
 }
 
-export const CATEGORY_MAX_ID = 6
+export const CATEGORY_MAX_ID = 50
 
 export function categoryGenerator(id: number): Category {
   return {
