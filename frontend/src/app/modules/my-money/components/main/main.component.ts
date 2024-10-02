@@ -1,14 +1,21 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {symbols} from "../../../../common/components/symbols/symbols";
 import {routeCreator} from "../../my-money.routes";
+import {TwaService} from "../../../../common/services/twa.service";
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './main.component.html',
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
+  constructor(private twa: TwaService) {
+  }
+
+  ngOnInit() {
+    this.twa.visibleBackButton(false)
+  }
+
   protected readonly routeCreator = routeCreator;
 }
