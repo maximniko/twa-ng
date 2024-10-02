@@ -11,7 +11,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, CategoryInputsComponent, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CategoryInputsComponent],
   templateUrl: './edit.component.html',
 })
 export class EditComponent implements OnInit, OnDestroy {

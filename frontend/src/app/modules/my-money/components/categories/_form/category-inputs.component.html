@@ -3,7 +3,7 @@
             'is-invalid': isInvalidTitle,
             'is-valid': parentForm.valid,
           }">
-  <label for="form-title">Name</label>
+  <label for="form-title">Title</label>
   <div class="invalid-feedback" *ngIf="isInvalidTitle">
     {{ validationErrors(titleErrors, 'Title') }}
   </div>
@@ -19,7 +19,7 @@
   </div>
 </div>
 <div class="form-floating mb-3">
-  <input type="text" class="form-control" placeholder="Icon" id="form-description" formControlName="description"
+  <input type="text" class="form-control" placeholder="Description" id="form-description" formControlName="description"
          [ngClass]="{
             'is-invalid': isInvalidDescription,
             'is-valid': parentForm.valid,
