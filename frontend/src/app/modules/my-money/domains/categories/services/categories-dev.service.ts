@@ -21,6 +21,7 @@ export class CategoriesDevService implements CategoriesInterface {
     if (!category.id) {
       category.id = Math.max(...this.dummy.map((item: Category) => item.id!)) + 1
     }
+    category.label = category.title.slice(0, 1)
     this.dummy.push(category)
     return of(category);
   }

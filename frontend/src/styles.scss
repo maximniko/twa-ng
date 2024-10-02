@@ -22,15 +22,23 @@ a, .link {
   text-decoration: none;
 }
 
+.bi {
+  display: inline-block;
+  vertical-align: -.125em;
+  fill: currentcolor;
+}
+
+.jcb {
+  display: flex;
+  justify-content: space-between;
+}
 //.bg-secondary {
 //  background: var(--tg-theme-secondary-bg-color);
 //}
 
-.btn {
+.tg-btn {
   background: var(--tg-theme-button-color);
   color: var(--tg-theme-button-text-color);
-  padding: 15px;
-  border-radius: 10px;
 }
 
 .color-hint {

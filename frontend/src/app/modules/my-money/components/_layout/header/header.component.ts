@@ -7,7 +7,8 @@ import {routeCreator} from "../../../my-money.routes";
   selector: 'my-money-header',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
+  host: {class: 'py-3'}
 })
 export class HeaderComponent {
   protected readonly routeCreator = routeCreator;

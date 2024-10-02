@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {symbols} from "../../../../../common/components/symbols/symbols";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {routeCreator} from "../../../my-money.routes";
@@ -16,7 +16,6 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 })
 export class EditComponent implements OnInit, OnDestroy {
   categoryItem!: Category
-  submited: number = 0
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,7 +40,6 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.submited += 1
     if (this.categoryForm.invalid) {
       return
     }
@@ -54,7 +52,6 @@ export class EditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.twa.visibleMainButton(false)
-    // this.twa.setMainButtonOffClick(this.submit)
   }
 
   protected readonly symbols = symbols;

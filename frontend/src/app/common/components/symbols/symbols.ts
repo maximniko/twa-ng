@@ -10,4 +10,5 @@ export const symbols = {
   personCheck: "person-check",
   search: "search",
   toggles2: "toggles2",
+  pencilFill: "pencil-fill",
 }

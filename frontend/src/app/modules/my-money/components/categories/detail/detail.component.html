@@ -1,7 +1,6 @@
-@if(categoryItem) {
+@if (categoryItem) {
   <section class="section">
-    <h1>Category name: {{ categoryItem.title }}</h1>
-    <a [routerLink]="routeCreator.categoriesEdit(categoryItem)">Edit</a>
+    <h1>{{ categoryItem.title }}</h1>
   </section>
 } @else {
   <section class="section">

@@ -6,7 +6,8 @@ import { TwaComponent } from "./components/twa/twa.component";
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, TwaComponent],
-  template: '<router-outlet />'
+  template: '<router-outlet />',
+  host:{class:'h-100'}
 })
 
 export class AppComponent {

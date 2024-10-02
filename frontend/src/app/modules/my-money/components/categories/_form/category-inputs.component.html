@@ -9,16 +9,6 @@
   </div>
 </div>
 <div class="form-floating mb-3">
-  <input type="text" class="form-control" placeholder="Icon" id="form-icon" formControlName="icon" [ngClass]="{
-            'is-invalid': isInvalidIcon,
-            'is-valid': parentForm.valid,
-          }">
-  <label for="form-icon">Icon</label>
-  <div class="invalid-feedback" *ngIf="isInvalidIcon">
-    {{ validationErrors(iconErrors, 'Icon') }}
-  </div>
-</div>
-<div class="form-floating mb-3">
   <input type="text" class="form-control" placeholder="Description" id="form-description" formControlName="description"
          [ngClass]="{
             'is-invalid': isInvalidDescription,
