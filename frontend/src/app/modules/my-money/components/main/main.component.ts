@@ -16,6 +16,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.twa.visibleBackButton(false)
+    this.twa.setMainButton({text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true}, () => {})
   }
 
   protected readonly routeCreator = routeCreator;
