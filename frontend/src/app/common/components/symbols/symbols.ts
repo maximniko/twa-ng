@@ -11,4 +11,6 @@ export const symbols = {
   search: "search",
   toggles2: "toggles2",
   pencilFill: "pencil-fill",
+  sliders: "sliders",
+  menu: "menu",
 }

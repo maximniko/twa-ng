@@ -1,3 +1,31 @@
-<header class="text-center">
-  Header
+<header class="jcb p-3">
+  <button class="navbar-toggler p-2" (click)="open(content)">
+    <svg class="bi">
+      <use [attr.xlink:href]="'#' + symbols.menu"></use>
+    </svg>
+  </button>
+<!--  <div class="form-floating">-->
+<!--    <select class="form-select" id="floatingSelect" aria-label="Select budget">-->
+<!--      <option value="1" selected>My</option>-->
+<!--    </select>-->
+<!--    <label for="floatingSelect">Budget</label>-->
+<!--  </div>-->
 </header>
+
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title" id="offcanvas-basic-title">Menu</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn" routerLink="{{routeCreator.settings()}}">
+      <svg class="bi">
+        <use [attr.xlink:href]="'#' + symbols.sliders"></use>
+      </svg>
+      Setting
+    </a>
+    <div class="text-end">
+      <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('Save click')">Save</button>
+    </div>
+  </div>
+</ng-template>
