@@ -1,7 +1,7 @@
 @import "variables";
 @import "common";
 
-header {
+.header, .offcanvas-header, .card-header {
   background: var(--tg-theme-header-bg-color);
   color: var(--tg-theme-section-header-text-color);
 }
@@ -26,6 +26,13 @@ a, .link {
   display: inline-block;
   vertical-align: -.125em;
   fill: currentcolor;
+  width: 1em;
+  height: 1em;
+}
+
+.navbar-toggler .bi {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .jcb {
@@ -64,7 +71,6 @@ a, .link {
 
 .section {
   background: var(--tg-theme-section-bg-color);
-  padding: 1rem;
   border-radius: .5rem;
 }
 
@@ -75,3 +81,6 @@ a, .link {
 .section-separator-color {
   color: var(--tg-theme-section-separator-color);
 }
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

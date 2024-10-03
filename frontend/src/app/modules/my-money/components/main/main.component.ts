@@ -8,6 +8,7 @@ import {TwaService} from "../../../../common/services/twa.service";
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './main.component.html',
+  host: {class: 'd-flex flex-column h-100'},
 })
 export class MainComponent implements OnInit {
   constructor(private twa: TwaService) {
