@@ -5,6 +5,7 @@ import {provideHttpClient, withFetch, withInterceptorsFromDi} from "@angular/com
 import {appRoutesProvider} from "./app.routes.provider";
 import {myMoneyProviders} from "./modules/my-money/my-money.proveders";
 import {interceptors} from "./common/interceptors.provider";
+import {provideCharts, withDefaultRegisterables} from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,5 +16,6 @@ export const appConfig: ApplicationConfig = {
     ...interceptors,
     // ...staticPagesProviders,
     ...myMoneyProviders,
+    provideCharts(withDefaultRegisterables()),
   ],
 };

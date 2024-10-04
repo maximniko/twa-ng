@@ -4,10 +4,11 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 import {routeCreator} from "../../my-money.routes";
 import {TwaService} from "../../../../common/services/twa.service";
 import {symbols} from "../../../../common/components/symbols/symbols";
+import {ChartComponent} from "./chart/chart.component";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, ChartComponent],
   templateUrl: './main.component.html',
   host: {class: 'd-flex flex-column h-100'},
 })
