@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {routeCreator} from "../../my-money.routes";
 import {TwaService} from "../../../../common/services/twa.service";
+import {symbols} from "../../../../common/components/symbols/symbols";
 
 @Component({
   standalone: true,
@@ -20,4 +21,5 @@ export class MainComponent implements OnInit {
   }
 
   protected readonly routeCreator = routeCreator;
+  protected readonly symbols = symbols;
 }

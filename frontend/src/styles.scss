@@ -48,12 +48,28 @@ a, .link {
   color: var(--tg-theme-button-text-color);
 }
 
+.accent-bg-shadow {
+  box-shadow: 0px -1rem 1.5rem var(--tg-theme-accent-text-color);
+}
+
+.accent-border {
+  border: solid 2px var(--tg-theme-accent-text-color);
+}
+.pagination .page-link {
+  background-color: transparent;
+}
+
+.bg-blur {
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
 .color-hint {
   color: var(--tg-theme-hint-color);
 }
 
 .color-accent {
-  color: var(--tg-theme-accent-text-color);
+  color: var(--tg-theme-accent-text-color) !important;
 }
 
 .color-subtitle {
