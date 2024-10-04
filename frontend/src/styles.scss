@@ -49,14 +49,15 @@ a, .link {
 }
 
 .accent-bg-shadow {
-  box-shadow: 0px -1rem 1.5rem var(--tg-theme-accent-text-color);
+  box-shadow: 0px -0.5rem 1rem var(--tg-theme-accent-text-color);
 }
 
-.accent-border {
-  border: solid 2px var(--tg-theme-accent-text-color);
+.accent-border, .form-select.accent-border, .card.accent-border {
+  border: solid 1px var(--tg-theme-accent-text-color);
 }
-.pagination .page-link {
-  background-color: transparent;
+
+.accent-border-top, .card.accent-border-top {
+  border-top: solid 3px var(--tg-theme-accent-text-color);
 }
 
 .bg-blur {
@@ -68,8 +69,8 @@ a, .link {
   color: var(--tg-theme-hint-color);
 }
 
-.color-accent {
-  color: var(--tg-theme-accent-text-color) !important;
+.color-accent, page-link.color-accent {
+  color: var(--tg-theme-accent-text-color);
 }
 
 .color-subtitle {
