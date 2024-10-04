@@ -1,4 +1,5 @@
 export const symbols = {
+  chevronLeft: "chevron-left",
   chevronRight: "chevron-right",
   collection: "collection",
   infoCircle: "info-circle",
