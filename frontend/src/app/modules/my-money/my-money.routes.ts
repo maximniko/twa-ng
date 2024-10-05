@@ -6,6 +6,7 @@ const ROUTE_PARTS = {
   myMoney: 'my-money',
   main: 'main',
   categories: 'categories',
+  chartCategory: 'chart-category',
   transactions: 'transactions',
   settings: 'settings',
 }
@@ -16,6 +17,7 @@ export const routeCreator = {
   categories: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}`,
   categoriesAdd: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/add`,
   categoryViewId: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/${category.id}`,
+  chartCategory: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.chartCategory}/${category.id}`,
   categoriesEdit: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/${category.id}/edit`,
   transactions: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}`,
   transactionViewId: (id: number) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}/${id}`,
@@ -50,6 +52,12 @@ export const myMoneyRoutes: Routes = [
       },
       {
         path: `${ROUTE_PARTS.categories}/:id`,
+        loadComponent: () => import('./components/categories/detail/detail.component').then(mod => mod.DetailComponent),
+        data: {title: (data: any) => `${data.categoryItem.title}`},
+        resolve: {categoryItem: categoryItemResolver},
+      },
+      {
+        path: `${ROUTE_PARTS.chartCategory}/:id`,
         loadComponent: () => import('./components/categories/detail/detail.component').then(mod => mod.DetailComponent),
         data: {title: (data: any) => `${data.categoryItem.title}`},
         resolve: {categoryItem: categoryItemResolver},
