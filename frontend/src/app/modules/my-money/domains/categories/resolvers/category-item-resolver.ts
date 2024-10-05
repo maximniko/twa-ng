@@ -1,4 +1,4 @@
-import {ActivatedRouteSnapshot, ResolveFn, Router, RouterStateSnapshot} from "@angular/router";
+import {ActivatedRouteSnapshot, ResolveFn, Router} from "@angular/router";
 import {Category} from "../interfaces/category";
 import {EMPTY, mergeMap, of} from "rxjs";
 import {inject} from "@angular/core";

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Transaction} from "../interfaces/transaction";
+import {FormTransaction, Transaction} from "../interfaces/transaction";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {TransactionsInterface} from "./transactions-interface";
@@ -10,12 +10,16 @@ export class TransactionsService implements TransactionsInterface {
   constructor(private readonly httpClient: HttpClient) {
   }
 
-  create(transaction: Transaction) {
+  create(transaction: FormTransaction) {
     return this.httpClient.post<Transaction>('/backend/transactions/create', transaction)
   }
 
-  edit(transaction: Transaction) {
+  edit(transaction: FormTransaction) {
     return this.httpClient.patch<Transaction>('/backend/transactions/edit', transaction)
+  }
+
+  delete(transaction: Transaction) {
+    return this.httpClient.delete(`/backend/transactions/delete/${transaction.id}`, {observe: 'response'})
   }
 
   list(filter: TransactionsFilter): Observable<Transaction[]> {

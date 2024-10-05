@@ -28,11 +28,11 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
     this.twa.setSecondaryButton(
       {text: 'Edit', is_visible: true, is_active: true, position: 'right'},
-      () => this.router.navigate([routeCreator.categoriesEdit(this.categoryItem)]),
+      () => this.router.navigate([routeCreator.main()]),
     )
     this.twa.setMainButton(
       {text: 'Edit', is_visible: true, is_active: true},
-      () => this.router.navigate([routeCreator.categoriesEdit(this.categoryItem)]),
+      () => this.router.navigate([routeCreator.main()]),
     )
   }
 

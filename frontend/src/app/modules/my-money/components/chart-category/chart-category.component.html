@@ -1,0 +1,15 @@
+<section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
+  <div class="hstack p-3 pb-0">
+    <span class="m-auto text-center h5">{{ categoryItem.title }}</span>
+    <period-selector></period-selector>
+  </div>
+  @if(transactions.length) {
+    <div class="card-body p-2">
+      <chart-transactions-doughnut [transactions]="transactions"></chart-transactions-doughnut>
+    </div>
+    <div class="card-body p-2">
+      <chart-transactions-list [transactions]="transactions"></chart-transactions-list>
+    </div>
+  }
+  <period-pagination></period-pagination>
+</section>

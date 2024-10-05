@@ -1,0 +1,23 @@
+@if (transactions.length) {
+  <div class="list-group">
+    @for (transaction of transactions; track transaction.id) {
+      <a class="list-group-item list-group-item-action hstack pe-0"
+         [routerLink]="routeCreator.transactionEdit(transaction)">
+        <div class="vstack ps-3 jcc">
+          <div class="jcs">
+            <div>{{ transaction.tag.title }}</div>
+          </div>
+          <div class="jcb">
+            <div>Sum:</div>
+            <div>{{ transaction.total }}</div>
+          </div>
+        </div>
+        <div class="jcc px-3">
+          <svg class="bi">
+            <use [attr.xlink:href]="'#' + symbols.chevronRight"/>
+          </svg>
+        </div>
+      </a>
+    }
+  </div>
+}
