@@ -1,6 +1,7 @@
 import {HttpParams} from "@angular/common/http";
 import {HttpParamsOptionsFromObject} from "../../../../../common/components/filters/interfaces/filter-interface";
 import {Transaction} from "../interfaces/transaction";
+import {ifEmpty} from "../../../../../common/extensions/Object";
 
 export class TransactionsFilter {
   constructor(private params: {
@@ -45,10 +46,6 @@ export class TransactionsFilter {
       return item.category.id == this.params.categoryId
     }
 
-    return this.ifEmpty()
-  }
-
-  ifEmpty(): boolean {
-    return Object.keys(this.params).length > 0
+    return ifEmpty(this.params)
   }
 }

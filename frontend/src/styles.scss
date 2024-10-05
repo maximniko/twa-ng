@@ -39,6 +39,18 @@ a, .link {
   display: flex;
   justify-content: space-between;
 }
+.jcc {
+  display: flex;
+  justify-content: center;
+}
+.jcs {
+  display: flex;
+  justify-content: start;
+}
+.jce {
+  display: flex;
+  justify-content: end;
+}
 //.bg-secondary {
 //  background: var(--tg-theme-secondary-bg-color);
 //}

@@ -1,6 +1,7 @@
 import {HttpParams} from "@angular/common/http";
 import {HttpParamsOptionsFromObject} from "../../../../../common/components/filters/interfaces/filter-interface";
 import {ChartCategory} from "../interfaces/chart-category";
+import {ifEmpty} from "../../../../../common/extensions/Object";
 
 export class ChartCategoriesFilter {
   constructor(private params: {
@@ -31,10 +32,6 @@ export class ChartCategoriesFilter {
       return item.category.id == this.params.categoryId
     }
 
-    return this.ifEmpty()
-  }
-
-  ifEmpty(): boolean {
-    return Object.keys(this.params).length > 0
+    return ifEmpty(this.params)
   }
 }

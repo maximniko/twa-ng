@@ -10,12 +10,16 @@
       <label for="period">Period</label>
     </div>
   </div>
-  <div class="card-body p-2">
-    <main-chart></main-chart>
-  </div>
-  <div class="card-body p-2">
-    <main-chart></main-chart>
-  </div>
+  @if(!chartCategories.length) {
+    {{ chartCategories.length }}
+  } @else {
+    <div class="card-body p-2">
+      <chart-categories-doughnut [chartCategories]="chartCategories"></chart-categories-doughnut>
+    </div>
+    <div class="card-body p-2">
+      <chart-categories-list [chartCategories]="chartCategories"></chart-categories-list>
+    </div>
+  }
   <nav aria-label="Page navigation" class="sticky-bottom p-2 bg-blur">
     <ul class="pagination pagination-lg jcb m-0 w-100">
       <li class="page-item"><a class="page-link color-accent" href="#">

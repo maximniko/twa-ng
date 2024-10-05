@@ -8,7 +8,8 @@ import {CATEGORY_MAX_ID} from "../../categories/interfaces/category";
 @Injectable({providedIn: 'root'})
 export class ChartCategoriesDevService implements ChartCategoriesInterface {
 
-  private dummy: ChartCategory[] = [...Array(CATEGORY_MAX_ID).keys()].map((i) => chartCategoryGenerator(i + 1))
+  dummy: ChartCategory[] = [...Array(CATEGORY_MAX_ID).keys()].map((i) => chartCategoryGenerator(i + 1))
+    .sort((a, b) => a.total > b.total ? -1 : 1)
 
   item(filter: ChartCategoriesFilter): Observable<ChartCategory | undefined> {
     return of(this.dummy.find((transaction: ChartCategory) => filter.filter(transaction))!)
