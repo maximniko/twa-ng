@@ -15,4 +15,6 @@ export const symbols = {
   sliders: "sliders",
   menu: "menu",
   calendar3: "calendar3",
+  gearFill: "gear-fill",
+  nodePlusFill: "node-plus-fill",
 }

@@ -46,6 +46,9 @@ export class TransactionInputsComponent extends ReactiveForm implements OnInit {
     ]))
   }
 
+  protected compareCategory(a: Category,b: Category): boolean {
+    return a.id == b.id
+  }
   private addControlCategory() {
     this.categoriesService.list(new CategoriesFilter({}))
       .subscribe(items => {
