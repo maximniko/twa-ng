@@ -30,7 +30,7 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
   protected transactionForm: FormGroup = this.formBuilder.group({})
 
   ngOnInit() {
-    this.twa.backButton(() => this.router.navigate([this._backUrl]))
+    this.twa.backButton(() => this.router.navigateByUrl(this._backUrl))
     this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, () => this.submit())
   }
 
@@ -45,7 +45,7 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
 
     const form: FormTransaction = this.transactionForm.value
     this.service.create(form).subscribe(
-      (transaction: Transaction) => this.router.navigate([routeCreator.chartCategory(transaction.category)])
+      (transaction: Transaction) => this.router.navigateByUrl(this._backUrl)
     )
   }
 
