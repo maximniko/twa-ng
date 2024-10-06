@@ -1,3 +1,4 @@
+@import "fonts";
 @import "variables";
 @import "common";
 
@@ -10,6 +11,7 @@ body {
   background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
   color-scheme: var(--tg-color-scheme);
+  font-family: 'Roboto-Regular', sans-serif;
 }
 
 .main {

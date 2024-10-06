@@ -2,7 +2,7 @@
   <select type="text" class="form-select" id="form-category" formControlName="category" [ngClass]="{
             'is-invalid': isInvalidCategory,
             'is-valid': parentForm.valid,
-          }">
+          }" [compareWith]="compareCategory">
     <option>Select category</option>
     @for(category of categoriesList; track category.id) {
       <option [ngValue]="category">{{ category.title }}</option>

@@ -9,6 +9,7 @@ import {Category} from "../../../domains/categories/interfaces/category";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {TransactionsService} from "../../../domains/transactions/services/transactions.service";
 import {FormTransaction, Transaction} from "../../../domains/transactions/interfaces/transaction";
+import {symbols} from "../../../../../common/components/symbols/symbols";
 
 @Component({
   standalone: true,
@@ -51,4 +52,6 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
   private get _backUrl(): string {
     return this.categoryItem ? routeCreator.chartCategory(this.categoryItem) : routeCreator.main()
   }
+
+  protected readonly symbols = symbols;
 }

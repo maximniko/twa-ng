@@ -9,6 +9,7 @@ import {FormTransaction, Transaction} from "../../../domains/transactions/interf
 import {TransactionsService} from "../../../domains/transactions/services/transactions.service";
 import {HttpStatusCode} from "@angular/common/http";
 import {SelectorComponent} from "../../_layout/period/selector.component";
+import {symbols} from "../../../../../common/components/symbols/symbols";
 
 @Component({
   standalone: true,
@@ -76,4 +77,6 @@ export class EditComponent implements OnInit, OnDestroy {
   private get _backUrl(): string {
     return routeCreator.chartCategory(this.transactionItem.category)
   }
+
+  protected readonly symbols = symbols;
 }
