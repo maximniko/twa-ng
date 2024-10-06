@@ -1,5 +1,7 @@
 <section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
-  <h1>Edit</h1>
+  <div class="p-3 pb-0">
+    <span class="text-center h5">Edit</span>
+  </div>
   <form [formGroup]="transactionForm" (ngSubmit)="save()">
     <transaction-inputs [parentForm]="transactionForm" [transactionItem]="transactionItem"></transaction-inputs>
     <button type="submit">save</button>

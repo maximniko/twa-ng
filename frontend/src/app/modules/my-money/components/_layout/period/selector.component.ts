@@ -1,11 +1,10 @@
 import {Component} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'period-selector',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule],
   template: `
     <div class="form-floating ms-auto">
       <select class="form-select rounded-4" id="period" aria-label="Select period">

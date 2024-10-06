@@ -38,21 +38,17 @@ export class TransactionInputsComponent extends ReactiveForm implements OnInit {
   }
 
   ngOnInit() {
-    this._initCategories()
+    this.addControlCategory()
     this.parentForm.addControl('total', this.formBuilder.control(this.transactionItem?.total ?? '', [
       Validators.min(1),
       Validators.max(1000000000),
     ]))
   }
 
-  private _initCategories() {
+  private addControlCategory() {
     this.categoriesService.list(new CategoriesFilter({}))
       .subscribe(items => {
         this.categoriesList = items
-        // const categoryIds = this.categoriesList.reduce<string[]>((acc, item: Category) => {
-        //   acc.push(String(item.id!))
-        //   return acc
-        // }, []);
 
         this.parentForm.addControl('category', this.formBuilder.control(this.transactionItem?.category, [
           Validators.required,

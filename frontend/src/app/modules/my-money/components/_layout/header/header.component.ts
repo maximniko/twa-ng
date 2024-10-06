@@ -1,6 +1,6 @@
 import {Component, inject, TemplateRef} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {routeCreator} from "../../../my-money.routes";
 import {symbols} from "../../../../../common/components/symbols/symbols";
 import {NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
@@ -8,7 +8,7 @@ import {NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: 'my-money-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {

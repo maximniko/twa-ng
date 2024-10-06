@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {routeCreator} from "../../../my-money.routes";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {PaginationComponent} from "../../_layout/period/pagination.component";
@@ -18,7 +18,7 @@ import {ListComponent} from "../_includes/chart-transactions/list/list.component
   templateUrl: './chart-category.component.html',
   host: {class: 'd-flex flex-column h-100'},
 })
-export class ChartCategoryComponent implements OnInit {
+export class ChartCategoryComponent implements OnInit, OnDestroy {
   title!: string
   categoryItem!: Category
   transactions: Transaction[] = []
@@ -27,6 +27,7 @@ export class ChartCategoryComponent implements OnInit {
     private twa: TwaService,
     private service: TransactionsService,
     private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.activatedRoute.data
       .subscribe(
@@ -41,9 +42,18 @@ export class ChartCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.twa.visibleBackButton(false)
-    this.twa.setMainButton({text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true}, () => {
+    this.twa.setMainButton(
+      {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
+      () => this.onMainClick(),
+    )
+  }
 
-    })
+  ngOnDestroy(): void {
+    this.twa.visibleMainButton(false)
+  }
+
+  private onMainClick() {
+    this.router.navigate([routeCreator.transactionAdd()])
   }
 
   protected readonly routeCreator = routeCreator;

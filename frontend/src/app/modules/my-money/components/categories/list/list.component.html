@@ -3,7 +3,7 @@
   @if (categories.length) {
     <div class="list-group">
       @for (category of categories; track category.id) {
-        <a class="list-group-item list-group-item-action jcb" [routerLink]="routeCreator.categoryViewId(category)">
+        <a class="list-group-item list-group-item-action jcb" [routerLink]="routeCreator.chartCategory(category)">
           {{ category.title }}
         </a>
       }
