@@ -29,7 +29,6 @@ import {DateValidator} from "../../../../../../common/extensions/Validators";
         formControlName="date"
         ngbDatepicker
         (click)="d.toggle()"
-        (focus)="d.toggle()"
         #d="ngbDatepicker"
         [ngClass]="{
             'is-invalid': isInvalidDate,

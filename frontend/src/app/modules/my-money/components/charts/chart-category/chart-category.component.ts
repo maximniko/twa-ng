@@ -33,9 +33,8 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
       .subscribe(
         (data: any) => {
           this.categoryItem = data['categoryItem']
-          this.service.list(new TransactionsFilter({categoryId: this.categoryItem.id})).subscribe(
-            items => this.transactions = items
-          )
+          this.service.list(new TransactionsFilter({categoryId: this.categoryItem.id}))
+              .subscribe(items => this.transactions = items)
         }
       )
   }
@@ -45,6 +44,9 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
     this.twa.setMainButton(
       {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
       () => this.onMainClick(),
+    )
+    this.twa.backButton(
+      () => this.router.navigate([routeCreator.main()]),
     )
   }
 
