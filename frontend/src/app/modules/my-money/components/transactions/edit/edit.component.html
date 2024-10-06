@@ -2,7 +2,7 @@
   <div class="p-3 pb-0">
     <span class="text-center h5">Edit</span>
   </div>
-  <form [formGroup]="transactionForm" (ngSubmit)="save()" class="px-2">
+  <form [formGroup]="transactionForm" (ngSubmit)="save()" class="p-3">
     <transaction-inputs [parentForm]="transactionForm" [transactionItem]="transactionItem"></transaction-inputs>
   </form>
 </section>
