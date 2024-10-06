@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Router, RouterLink} from "@angular/router";
-import {symbols} from "../../../../../common/components/symbols/symbols";
+import {Router} from "@angular/router";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {routeCreator} from "../../../my-money.routes";
 import {ReactiveForm} from "../../../../../common/components/reactive-form.component";
@@ -44,9 +43,7 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
 
     const newCategory: Category = this.categoryForm.value
     this.service.create(newCategory).subscribe(
-      (category: Category) => this.router.navigate([routeCreator.categoryViewId(category)])
+      (category: Category) => this.router.navigate([routeCreator.chartCategory(category)])
     )
   }
-
-  protected readonly symbols = symbols;
 }

@@ -35,7 +35,6 @@ export class DoughnutComponent implements OnInit {
   }
 
   private initChartData() {
-
     const chartDate = this.chartDate
     this.doughnutChartLabels.push(...chartDate.labels)
     this.doughnutChartDatasets.push({

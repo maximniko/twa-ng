@@ -8,10 +8,11 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {FormTransaction, Transaction} from "../../../domains/transactions/interfaces/transaction";
 import {TransactionsService} from "../../../domains/transactions/services/transactions.service";
 import {HttpStatusCode} from "@angular/common/http";
+import {SelectorComponent} from "../../_layout/period/selector.component";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TransactionInputsComponent],
+  imports: [CommonModule, ReactiveFormsModule, TransactionInputsComponent, SelectorComponent],
   templateUrl: './edit.component.html',
 })
 export class EditComponent implements OnInit, OnDestroy {
@@ -30,17 +31,23 @@ export class EditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.twa.backButton(() => this.router.navigate([this._backUrl]))
+    this.twa.setSecondaryButton(
+      {text: 'Delete', is_visible: true, is_active: true, has_shine_effect: false, position: 'left'},
+      () => this.delete(),
+    )
     this.twa.setMainButton(
       {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
       () => this.save(),
     )
-    this.twa.setSecondaryButton(
-      {text: 'Delete', is_visible: true, is_active: true, has_shine_effect: true, position: 'left'},
-      () => this.delete(),
-    )
 
     this.activatedRoute.data
       .subscribe((data: any) => this.transactionItem = data.categoryItem)
+  }
+
+  ngOnDestroy(): void {
+    this.twa.backButton(() => this.router.navigate([this._backUrl]))
+    this.twa.visibleSecondaryButton(false)
+    this.twa.visibleMainButton(false)
   }
 
   protected save() {
@@ -67,10 +74,5 @@ export class EditComponent implements OnInit, OnDestroy {
 
   private get _backUrl(): string {
     return routeCreator.chartCategory(this.transactionItem.category)
-  }
-
-  ngOnDestroy(): void {
-    this.twa.visibleMainButton(false)
-    this.twa.visibleSecondaryButton(false)
   }
 }
