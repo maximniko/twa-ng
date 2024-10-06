@@ -1,3 +1,4 @@
+<transaction-tag-input [transactionItem]="transactionItem" [parentForm]="parentForm"></transaction-tag-input>
 <div class="form-floating mb-3">
   <select type="text" class="form-select" id="form-category" formControlName="category" [ngClass]="{
             'is-invalid': isInvalidCategory,
@@ -13,7 +14,6 @@
     {{ validationErrors(categoryErrors, 'Category') }}
   </div>
 </div>
-<transaction-tag-input [transactionItem]="transactionItem" [parentForm]="parentForm"></transaction-tag-input>
 <div class="form-floating mb-3">
   <input type="number" class="form-control" placeholder="Total" id="form-total" formControlName="total" [ngClass]="{
             'is-invalid': isInvalidTotal,
@@ -25,4 +25,3 @@
   </div>
 </div>
 <transaction-date-input [transactionItem]="transactionItem" [parentForm]="parentForm"></transaction-date-input>
-{{ parentForm.value | json }}
