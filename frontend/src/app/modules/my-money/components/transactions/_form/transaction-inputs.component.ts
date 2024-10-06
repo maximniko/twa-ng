@@ -41,7 +41,7 @@ export class TransactionInputsComponent extends ReactiveForm implements OnInit {
     this._initCategories()
     this.parentForm.addControl('total', this.formBuilder.control(this.transactionItem?.total ?? '', [
       Validators.min(1),
-      Validators.max(1000000),
+      Validators.max(1000000000),
     ]))
   }
 

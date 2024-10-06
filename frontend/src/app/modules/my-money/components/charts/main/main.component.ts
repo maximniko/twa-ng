@@ -1,18 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {routeCreator} from "../../my-money.routes";
-import {TwaService} from "../../../../common/services/twa.service";
-import {symbols} from "../../../../common/components/symbols/symbols";
-import {DoughnutComponent} from "../charts/_includes/chart-categories/chart/doughnut.component";
-import {ListComponent} from "../charts/_includes/chart-categories/list/list.component";
-import {ChartCategoriesFilter} from "../../domains/charts/services/chart-categories-filter";
-import {ChartCategoriesService} from "../../domains/charts/services/chart-categories.service";
-import {ChartCategory} from "../../domains/charts/interfaces/chart-category";
+import {routeCreator} from "../../../my-money.routes";
+import {TwaService} from "../../../../../common/services/twa.service";
+import {symbols} from "../../../../../common/components/symbols/symbols";
+import {DoughnutComponent} from "../_includes/chart-categories/chart/doughnut.component";
+import {ListComponent} from "../_includes/chart-categories/list/list.component";
+import {ChartCategoriesFilter} from "../../../domains/charts/services/chart-categories-filter";
+import {ChartCategoriesService} from "../../../domains/charts/services/chart-categories.service";
+import {ChartCategory} from "../../../domains/charts/interfaces/chart-category";
+import {SelectorComponent} from "../../_layout/period/selector.component";
+import {PaginationComponent} from "../../_layout/period/pagination.component";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, DoughnutComponent, ListComponent],
+  imports: [CommonModule, RouterLink, RouterLinkActive, DoughnutComponent, ListComponent, SelectorComponent, PaginationComponent],
   templateUrl: './main.component.html',
   host: {class: 'd-flex flex-column h-100'},
 })

@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {
-  dummyTags, existingTag,
-  FormTransaction, nextTag,
+  FormTransaction,
   Transaction,
   TRANSACTION_MAX_ID, transactionFromForm,
-  transactionGenerator, TransactionTag
+  transactionGenerator
 } from "../interfaces/transaction";
 import {Observable, of} from "rxjs";
 import {TransactionsInterface} from "./transactions-interface";
@@ -21,7 +20,12 @@ export class TransactionsDevService implements TransactionsInterface {
   }
 
   list(filter: TransactionsFilter): Observable<Transaction[]> {
-    return of(this.dummy.filter((item: Transaction) => filter.filter(item)))
+    return of(
+      this.dummy.filter((item: Transaction) => filter.filter(item))
+        .sort(
+          (a: Transaction, b: Transaction) => a.date > b.date ? -1 : 1
+        )
+    )
   }
 
   create(form: FormTransaction): Observable<Transaction> {

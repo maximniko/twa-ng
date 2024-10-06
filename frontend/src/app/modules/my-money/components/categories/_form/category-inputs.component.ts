@@ -42,10 +42,6 @@ export class CategoryInputsComponent extends ReactiveForm implements OnInit {
     return this.parentForm.get('title');
   }
 
-  private get icon() {
-    return this.parentForm.get('icon');
-  }
-
   private get description() {
     return this.parentForm.get('description');
   }

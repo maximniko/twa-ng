@@ -28,34 +28,28 @@ export const myMoneyRoutes: Routes = [
   {
     path: `${ROUTE_PARTS.myMoney}`,
     loadComponent: () => import('./my-money.component').then(mod => mod.MyMoneyComponent),
-    data: {title: 'My Money'},
     children: [
       {path: '', redirectTo: routeCreator.main(), pathMatch: 'full'},
       {
         path: `${ROUTE_PARTS.main}`,
-        data: {title: "Main"},
-        loadComponent: () => import('./components/main/main.component').then(mod => mod.MainComponent)
+        loadComponent: () => import('./components/charts/main/main.component').then(mod => mod.MainComponent)
       },
       {
         path: `${ROUTE_PARTS.settings}`,
-        data: {title: "Settings"},
         loadComponent: () => import('./components/settings/settings.component').then(mod => mod.SettingsComponent)
       },
       {
         path: `${ROUTE_PARTS.chartCategory}/:id`,
-        loadComponent: () => import('./components/chart-category/chart-category.component').then(mod => mod.ChartCategoryComponent),
-        data: {title: (data: any) => `${data.categoryItem.title}`},
+        loadComponent: () => import('./components/charts/chart-category/chart-category.component').then(mod => mod.ChartCategoryComponent),
         resolve: {categoryItem: categoryItemResolver},
       },
       {
         path: `${ROUTE_PARTS.transactions}/add`,
         loadComponent: () => import('./components/transactions/add/add.component').then(mod => mod.AddComponent),
-        data: {title: 'Add Transaction'},
       },
       {
         path: `${ROUTE_PARTS.transactions}/:id/edit`,
         loadComponent: () => import('./components/transactions/edit/edit.component').then(mod => mod.EditComponent),
-        data: {title: 'Edit Transaction'},
         resolve: {categoryItem: transactionItemResolver},
       },
     ],

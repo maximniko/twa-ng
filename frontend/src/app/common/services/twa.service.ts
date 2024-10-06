@@ -23,6 +23,10 @@ export class TwaService {
     return WebApp.initData
   }
 
+  getUserLanguageCode(): string | undefined {
+    return WebApp.initDataUnsafe.user?.language_code
+  }
+
   setMainButton(params: BottomButtonParams, onClick: VoidFunction) {
     WebApp.MainButton.setParams(params)
     WebApp.MainButton.onClick(onClick)
@@ -61,9 +65,9 @@ export class TwaService {
   showPopup(params: PopupParams, callback?: (id?: string) => unknown) {
     WebApp.showPopup(params, callback)
     // WebApp.showPopup({
-    //   title: 'Title',
-    //   message: 'Some message',
-    //   buttons: [
+    //   title: 'Title', // 64
+    //   message: 'Some message', // 256
+    //   buttons: [ // 1-3 items
     //     {id: 'link', type: 'default', text: 'Open ton.org'},
     //     {type: 'cancel'},
     //   ]

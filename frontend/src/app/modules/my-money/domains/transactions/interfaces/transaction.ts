@@ -21,7 +21,7 @@ export interface FormTransaction {
 export interface TransactionTag {
   id: number,
   title: string,
-  frequency: number, // for sort
+  frequency?: number,
 }
 
 export const TRANSACTION_MAX_ID = 100
@@ -44,7 +44,6 @@ function transactionTagGenerator(id: number): TransactionTag {
   return {
     id: id,
     title: `Tag ${id}`,
-    frequency: getRandomInt(id * 100),
   }
 }
 
@@ -52,7 +51,6 @@ export function nextTag(title: string): TransactionTag {
   const tag = {
     id: Math.max(...dummyTags.map((item: TransactionTag) => item.id!)) + 1,
     title: title,
-    frequency: Math.max(...dummyTags.map((item: TransactionTag) => item.frequency!)) + 1,
   }
   dummyTags.push(tag)
 
@@ -67,9 +65,9 @@ export function transactionFromForm(form: FormTransaction): Transaction {
   const tag = existingTag(form.tag) ?? nextTag(form.tag)
   const transitionItem: Transaction = {
     id: form.id ?? Math.max(...dummyTransactions.map((item: Transaction) => item.id!)) + 1,
-    total: form.total,
-    tag: tag,
     category: form.category,
+    tag: tag,
+    total: form.total,
     date: new Date(`${form.date.year}-${form.date.month}-${form.date.day}`),
   }
   dummyTransactions.push(transitionItem)

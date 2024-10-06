@@ -49,8 +49,7 @@ export class EditComponent implements OnInit, OnDestroy {
     }
 
     const form: FormTransaction = this.transactionForm.value
-
-    this.service.edit(form)
+    this.service.edit(Object.assign(this.transactionItem, form))
       .subscribe(() => this.router.navigate([this._backUrl]))
   }
 
