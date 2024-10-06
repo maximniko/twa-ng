@@ -1,8 +1,14 @@
 import {Injectable} from '@angular/core';
-import {Transaction, TRANSACTION_MAX_ID, transactionGenerator} from "../interfaces/transaction";
+import {
+  FormTransaction,
+  Transaction,
+  TRANSACTION_MAX_ID, transactionFromForm,
+  transactionGenerator
+} from "../interfaces/transaction";
 import {Observable, of} from "rxjs";
 import {TransactionsInterface} from "./transactions-interface";
 import {TransactionsFilter} from "./transactions-filter";
+import {HttpResponse, HttpStatusCode} from "@angular/common/http";
 
 @Injectable({providedIn: 'root'})
 export class TransactionsDevService implements TransactionsInterface {
@@ -14,22 +20,35 @@ export class TransactionsDevService implements TransactionsInterface {
   }
 
   list(filter: TransactionsFilter): Observable<Transaction[]> {
-    return of(this.dummy.filter((item: Transaction) => filter.filter(item)))
+    return of(
+      this.dummy.filter((item: Transaction) => filter.filter(item))
+        .sort(
+          (a: Transaction, b: Transaction) => a.date > b.date ? -1 : 1
+        )
+    )
   }
 
-  create(transition: Transaction): Observable<Transaction> {
-    if (!transition.id) {
-      transition.id = Math.max(...this.dummy.map((item: Transaction) => item.id!)) + 1
-    }
-    this.dummy.push(transition)
-    return of(transition);
+  create(form: FormTransaction): Observable<Transaction> {
+    const transaction = transactionFromForm(form)
+    this.dummy.push(transaction)
+    return of(transaction);
   }
 
-  edit(transition: Transaction): Observable<Transaction> {
-    const index = this.dummy.findIndex((item: Transaction) => item.id == transition.id)
+  edit(form: FormTransaction): Observable<Transaction> {
+    const index = this.dummy.findIndex((item: Transaction) => item.id == form.id)
+    const transaction = transactionFromForm(form)
     if (index != -1) {
-      this.dummy[index] = transition
+      this.dummy[index] = transaction
     }
-    return of(transition);
+    return of(transaction);
+  }
+
+  delete(transaction: Transaction): Observable<HttpResponse<object>> {
+    const index = this.dummy.findIndex((item: Transaction) => item.id == transaction.id)
+    if (index > -1) {
+      this.dummy.splice(index, 1);
+      return of(new HttpResponse<object>({status: HttpStatusCode.NoContent}));
+    }
+    return of(new HttpResponse<object>({status: HttpStatusCode.BadRequest}));
   }
 }

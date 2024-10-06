@@ -14,4 +14,5 @@ export const symbols = {
   pencilFill: "pencil-fill",
   sliders: "sliders",
   menu: "menu",
+  calendar3: "calendar3",
 }

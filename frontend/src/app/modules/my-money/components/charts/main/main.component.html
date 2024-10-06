@@ -1,0 +1,21 @@
+<section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
+  <div class="hstack p-3 pb-0">
+    <span class="m-auto text-center h5">Сalculations</span>
+    <period-selector></period-selector>
+  </div>
+  @if(chartCategories.length) {
+    <div class="card-body p-2">
+      <chart-categories-doughnut [chartCategories]="chartCategories"></chart-categories-doughnut>
+    </div>
+    <div class="card-body p-2">
+      <chart-categories-list [chartCategories]="chartCategories"></chart-categories-list>
+    </div>
+  } @else {
+    <div class="card-body p-2">
+      <div>
+        Add first transaction
+      </div>
+    </div>
+  }
+  <period-pagination></period-pagination>
+</section>

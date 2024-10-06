@@ -1,0 +1,7 @@
+<section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
+  <h1>Add Transaction</h1>
+  <form [formGroup]="transactionForm" (ngSubmit)="submit()">
+    <transaction-inputs [parentForm]="transactionForm"></transaction-inputs>
+    <button type="submit">save</button>
+  </form>
+</section>

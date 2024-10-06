@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterLink, RouterLinkActive} from "@angular/router";
 import {BaseChartDirective} from "ng2-charts";
 import {ChartConfiguration, Color} from "chart.js";
 import {ChartCategory} from "../../../../../domains/charts/interfaces/chart-category";
@@ -8,7 +7,7 @@ import {ChartCategory} from "../../../../../domains/charts/interfaces/chart-cate
 @Component({
   selector: 'chart-categories-doughnut',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, BaseChartDirective],
+  imports: [CommonModule, BaseChartDirective],
   template: `
     <canvas baseChart
             [labels]="doughnutChartLabels"
@@ -36,12 +35,19 @@ export class DoughnutComponent implements OnInit {
   }
 
   private initChartData() {
+    const maxIndex = 5 // TODO move to setting
     const chartData: ChartData = this.chartCategories.reduce<ChartData>(
-      (previousValue: ChartData, currentValue: ChartCategory) => {
-        previousValue.labels.push(currentValue.category.title)
-        previousValue.backgroundColors.push(currentValue.category.color)
-        previousValue.data.push(currentValue.total)
-        return previousValue
+      (acc: ChartData, value: ChartCategory, currentIndex: number) => {
+        if (currentIndex < maxIndex) {
+          acc.labels.push(value.category.title)
+          acc.backgroundColors.push(value.color)
+          acc.data.push(value.total)
+        } else {
+          acc.labels[maxIndex] = 'Others'
+          acc.backgroundColors.push('#999')
+          acc.data[maxIndex] = (acc.data[maxIndex] ?? 0) + value.total
+        }
+        return acc
       }, <ChartData>{
         labels: [],
         backgroundColors: [],
