@@ -20,6 +20,7 @@ import {Transaction} from "../../../../domains/transactions/interfaces/transacti
   template: `
     <div class="form-floating mb-3">
       <input type="text" class="form-control" placeholder="Title" id="form-tag" formControlName="tag"
+             [focusFirst]="true"
              [ngbTypeahead]="search"
              [ngClass]="{
             'is-invalid': isInvalidTag,
