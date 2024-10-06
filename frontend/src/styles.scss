@@ -39,18 +39,22 @@ a, .link {
   display: flex;
   justify-content: space-between;
 }
+
 .jcc {
   display: flex;
   justify-content: center;
 }
+
 .jcs {
   display: flex;
   justify-content: start;
 }
+
 .jce {
   display: flex;
   justify-content: end;
 }
+
 //.bg-secondary {
 //  background: var(--tg-theme-secondary-bg-color);
 //}
@@ -109,4 +113,15 @@ a, .link {
 
 .section-separator-color {
   color: var(--tg-theme-section-separator-color);
+}
+
+// Form inputs
+.was-validated .form-select:valid, .form-select.is-valid,
+.was-validated .form-control:valid, .form-control.is-valid {
+  border-color: var(--tg-theme-accent-text-color);
+}
+
+.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+  border-color: var(--tg-theme-accent-text-color);
+  box-shadow: 0 0 5px 1px var(--tg-theme-accent-text-color);
 }
