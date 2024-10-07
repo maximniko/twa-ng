@@ -39,6 +39,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.twa.offMainButton(this.onMainClick)
+    this.twa.close()
   }
 
   onMainClick() {
