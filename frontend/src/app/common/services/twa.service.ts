@@ -27,7 +27,7 @@ export class TwaService {
     WebApp.SecondaryButton.onClick(onClick)
   }
 
-  offMainButton(offClick: VoidFunction, show: boolean = true) {
+  offMainButton(offClick: VoidFunction, show: boolean = false) {
     WebApp.MainButton.offClick(offClick)
     this._buttonVisible(WebApp.MainButton, show)
   }
