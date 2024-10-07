@@ -42,7 +42,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.twa.close()
   }
 
-  private onMainClick() {
+  onMainClick() {
     this.router.navigate([routeCreator.transactionAdd()])
   }
 
