@@ -20,15 +20,12 @@ export class EditComponent implements OnInit, OnDestroy {
   transactionItem!: Transaction
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private twa: TwaService,
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private service: TransactionsService
+    protected activatedRoute: ActivatedRoute,
+    protected twa: TwaService,
+    protected router: Router,
+    protected formBuilder: FormBuilder,
+    protected service: TransactionsService
   ) {
-    this.delete = this.delete.bind(this)
-    this.save = this.save.bind(this)
-    this.goBack = this.goBack.bind(this)
   }
 
   protected transactionForm: FormGroup = this.formBuilder.group({})
@@ -37,22 +34,22 @@ export class EditComponent implements OnInit, OnDestroy {
     this.activatedRoute.data
       .subscribe((data: any) => {
         this.transactionItem = data.transactionItem
-        this.twa.backButtonOnClick(this.goBack)
+        this.twa.backButtonOnClick(() => this.goBack)
       })
     this.twa.setSecondaryButton(
       {text: 'Delete', is_visible: true, is_active: true, has_shine_effect: false, position: 'left'},
-      this.delete,
+      () => this.delete,
     )
     this.twa.setMainButton(
       {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
-      this.save,
+      () => this.save,
     )
   }
 
   ngOnDestroy(): void {
-    this.twa.offBackButton(this.goBack, false)
-    this.twa.offMainButton(this.save)
-    this.twa.offSecondaryButton(this.delete, false)
+    this.twa.offBackButton(() => this.goBack, false)
+    this.twa.offMainButton(() => this.save)
+    this.twa.offSecondaryButton(() => this.delete, false)
   }
 
   protected save() {

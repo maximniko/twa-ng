@@ -21,11 +21,10 @@ export class MainComponent implements OnInit, OnDestroy {
   protected chartCategories: ChartCategory[] = []
 
   constructor(
-    private twa: TwaService,
-    private service: ChartCategoriesService,
-    private router: Router
+    protected twa: TwaService,
+    protected service: ChartCategoriesService,
+    protected router: Router
   ) {
-    this.onMainClick = this.onMainClick.bind(this)
   }
 
   ngOnInit(): void {
@@ -33,12 +32,12 @@ export class MainComponent implements OnInit, OnDestroy {
     this.twa.visibleBackButton(false)
     this.twa.setMainButton(
       {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
-      this.onMainClick
+      () => this.onMainClick
     )
   }
 
   ngOnDestroy(): void {
-    this.twa.offMainButton(this.onMainClick)
+    this.twa.offMainButton(() => this.onMainClick)
   }
 
   onMainClick() {
