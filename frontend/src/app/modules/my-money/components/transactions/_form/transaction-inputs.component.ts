@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnDestroy, OnInit} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {ReactiveForm} from "../../../../../common/components/reactive-form.component";
 import {
@@ -15,6 +15,7 @@ import {DateInputComponent} from "./components/date-input.component";
 import {Category} from "../../../domains/categories/interfaces/category";
 import {CategoriesService} from "../../../domains/categories/services/categories.service";
 import {CategoriesFilter} from "../../../domains/categories/services/categories-filter";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'transaction-inputs',
@@ -23,12 +24,13 @@ import {CategoriesFilter} from "../../../domains/categories/services/categories-
   templateUrl: './transaction-inputs.component.html',
   viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]
 })
-export class TransactionInputsComponent extends ReactiveForm implements OnInit {
+export class TransactionInputsComponent extends ReactiveForm implements OnInit, OnDestroy {
   @Input() transactionItem?: Transaction | undefined
   @Input() categoryItem?: Category | undefined
   @Input() parentForm!: FormGroup
 
   categoriesList: Category[] = []
+  protected serviceSubscription?: Subscription
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,6 +48,10 @@ export class TransactionInputsComponent extends ReactiveForm implements OnInit {
     ]))
   }
 
+  ngOnDestroy(): void {
+    this.serviceSubscription?.unsubscribe()
+  }
+
   protected compareCategory(a?: Category, b?: Category): boolean {
     if (a && b) {
       return a.id == b.id
@@ -54,15 +60,15 @@ export class TransactionInputsComponent extends ReactiveForm implements OnInit {
   }
 
   private addControlCategory() {
-    this.categoriesService.list(new CategoriesFilter({}))
+    this.serviceSubscription = this.categoriesService.list(new CategoriesFilter({}))
       .subscribe(items => {
         this.categoriesList = items
-
-        this.parentForm.addControl('category', this.formBuilder.control(
-          this.transactionItem?.category ?? this.categoryItem,
-          [Validators.required],
-        ))
       })
+
+    this.parentForm.addControl('category', this.formBuilder.control(
+      this.transactionItem?.category ?? this.categoryItem,
+      [Validators.required],
+    ))
   }
 
   private get category() {
