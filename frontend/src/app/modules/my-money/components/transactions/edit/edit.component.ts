@@ -26,6 +26,9 @@ export class EditComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private service: TransactionsService
   ) {
+    this.delete = this.delete.bind(this)
+    this.save = this.save.bind(this)
+    this.goBack = this.goBack.bind(this)
   }
 
   protected transactionForm: FormGroup = this.formBuilder.group({})
@@ -34,24 +37,22 @@ export class EditComponent implements OnInit, OnDestroy {
     this.activatedRoute.data
       .subscribe((data: any) => {
         this.transactionItem = data.transactionItem
-        this.twa.backButton(() => this.router.navigateByUrl(this._backUrl))
+        this.twa.backButtonOnClick(this.goBack)
       })
     this.twa.setSecondaryButton(
       {text: 'Delete', is_visible: true, is_active: true, has_shine_effect: false, position: 'left'},
-      () => this.delete(),
+      this.delete,
     )
     this.twa.setMainButton(
       {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
-      () => this.save(),
+      this.save,
     )
-    this.transactionForm.statusChanges
-      .subscribe((status: FormControlStatus) => this.twa.mainButtonIsActive(status == "VALID"))
   }
 
   ngOnDestroy(): void {
-    this.twa.visibleBackButton(false)
-    this.twa.visibleSecondaryButton(false)
-    this.twa.visibleMainButton(false)
+    this.twa.offBackButton(this.goBack, false)
+    this.twa.offMainButton(this.save)
+    this.twa.offSecondaryButton(this.delete, false)
   }
 
   protected save() {
@@ -69,12 +70,16 @@ export class EditComponent implements OnInit, OnDestroy {
     this.service.delete(this.transactionItem).subscribe(
       res => {
         if (res.status == HttpStatusCode.NoContent) {
-          this.router.navigateByUrl(this._backUrl)
+          this.goBack()
         } else {
           // todo handle error
         }
       }
     )
+  }
+
+  goBack(): void {
+    this.router.navigate([this._backUrl])
   }
 
   protected get _backUrl(): string {

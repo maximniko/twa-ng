@@ -6,8 +6,9 @@ import {symbols} from "../../../../../common/components/symbols/symbols";
   selector: 'period-pagination',
   standalone: true,
   imports: [CommonModule],
+  host: {class: 'sticky-bottom'},
   template: `
-    <nav aria-label="Page navigation" class="sticky-bottom p-2 bg-blur">
+    <nav aria-label="Page navigation" class="p-2 bg-blur">
       <ul class="pagination pagination-lg jcb m-0 w-100">
         <li class="page-item"><a class="page-link color-accent" href="#">
           <svg class="bi">

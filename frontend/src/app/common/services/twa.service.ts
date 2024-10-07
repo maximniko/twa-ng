@@ -6,17 +6,7 @@ import {PopupParams, SecondaryButton} from "@twa-dev/types";
 export class TwaService {
 
   constructor() {
-    WebApp.ready();
-    WebApp.expand();
-    if (WebApp.colorScheme) {
-      document.documentElement.setAttribute('data-bs-theme', WebApp.colorScheme)
-    }
-    WebApp.onEvent("themeChanged", () => {
-      document.documentElement.setAttribute('data-bs-theme', WebApp.colorScheme)
-    })
-
-    // WebApp.MainButton.onClick(() => WebApp.showAlert('Main Button was clicked'))
-    // WebApp.MainButton.show()
+    this.initTheme()
   }
 
   getInitData(): string {
@@ -32,29 +22,32 @@ export class TwaService {
     WebApp.MainButton.onClick(onClick)
   }
 
-  setSecondaryButton(params: BottomButtonParams & {position?: SecondaryButton["position"]}, onClick: VoidFunction) {
+  setSecondaryButton(params: BottomButtonParams & { position?: SecondaryButton["position"] }, onClick: VoidFunction) {
     WebApp.SecondaryButton.setParams(params)
     WebApp.SecondaryButton.onClick(onClick)
   }
 
-  visibleSettingsButton(show: boolean) {
-    this._buttonVisible(WebApp.SettingsButton, show)
+  offMainButton(offClick: VoidFunction, show: boolean = true) {
+    WebApp.MainButton.offClick(offClick)
+    this._buttonVisible(WebApp.MainButton, show)
   }
 
-  visibleSecondaryButton(show: boolean) {
+  offSecondaryButton(offClick: VoidFunction, show: boolean = true) {
+    WebApp.SecondaryButton.offClick(offClick)
     this._buttonVisible(WebApp.SecondaryButton, show)
+  }
+
+  offBackButton(cb: VoidFunction, show: boolean = true) {
+    WebApp.BackButton.offClick(cb)
+    this._buttonVisible(WebApp.BackButton, show)
   }
 
   visibleBackButton(show: boolean) {
     this._buttonVisible(WebApp.BackButton, show)
   }
 
-  backButtonShow() {
-    WebApp.BackButton.show()
-  }
-
-  backButton(cb: VoidFunction) {
-    this.backButtonShow()
+  backButtonOnClick(cb: VoidFunction) {
+    this.visibleBackButton(true)
     WebApp.BackButton.onClick(cb)
   }
 
@@ -101,6 +94,24 @@ export class TwaService {
   expand(): void {
     WebApp.expand()
   }
+
+  ready(): void {
+    WebApp.ready()
+  }
+
+  initTheme(): void {
+    if (WebApp.colorScheme) {
+      document.documentElement.setAttribute('data-bs-theme', WebApp.colorScheme)
+    }
+    WebApp.onEvent("themeChanged", () => {
+      document.documentElement.setAttribute('data-bs-theme', WebApp.colorScheme)
+    })
+  }
+
+  close(): void {
+    WebApp.close()
+  }
+
 }
 
 type BottomButtonParams = {

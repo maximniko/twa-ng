@@ -29,6 +29,8 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
+    this.goBack = this.goBack.bind(this)
+    this.onMainClick = this.onMainClick.bind(this)
     this.activatedRoute.data
       .subscribe(
         (data: any) => {
@@ -40,18 +42,20 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.twa.backButton(
-      () => this.router.navigate([routeCreator.main()]),
-    )
+    this.twa.backButtonOnClick(this.goBack)
     this.twa.setMainButton(
       {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
-      () => this.onMainClick(),
+      this.onMainClick,
     )
   }
 
   ngOnDestroy(): void {
-    this.twa.visibleMainButton(false)
-    this.twa.visibleBackButton(false)
+    this.twa.offMainButton(this.onMainClick)
+    this.twa.offBackButton(this.goBack)
+  }
+
+  goBack() {
+    this.router.navigate([routeCreator.main()])
   }
 
   private onMainClick() {

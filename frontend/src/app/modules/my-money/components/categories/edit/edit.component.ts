@@ -28,7 +28,7 @@ export class EditComponent implements OnInit, OnDestroy {
   protected categoryForm: FormGroup = this.formBuilder.group({})
 
   ngOnInit() {
-    this.twa.backButton(() => this.router.navigate([routeCreator.chartCategory(this.categoryItem)]))
+    this.twa.backButtonOnClick(() => this.router.navigate([routeCreator.chartCategory(this.categoryItem)]))
     this.twa.setMainButton(
       {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
       () => this.submit(),

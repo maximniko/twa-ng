@@ -25,6 +25,8 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
     private service: TransactionsService
   ) {
     super();
+    this.submit = this.submit.bind(this)
+    this.submit = this.submit.bind(this)
   }
 
   protected transactionForm: FormGroup = this.formBuilder.group({})
@@ -32,13 +34,13 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
   ngOnInit() {
     this.transactionForm.statusChanges
       .subscribe((status: FormControlStatus) => this.twa.mainButtonIsActive(status == "VALID"))
-    this.twa.backButton(() => this.router.navigate([this._backUrl]))
-    this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, () => this.submit())
+    this.twa.backButtonOnClick(this.goBack)
+    this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, this.submit)
   }
 
   ngOnDestroy(): void {
-    this.twa.visibleBackButton(false)
-    this.twa.visibleMainButton(false)
+    this.twa.offBackButton(this.goBack)
+    this.twa.offMainButton(this.submit)
   }
 
   submit() {
@@ -52,8 +54,8 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
     )
   }
 
-  protected get _backUrl(): string {
-    return this.categoryItem ? routeCreator.chartCategory(this.categoryItem) : routeCreator.main()
+  goBack() {
+    this.router.navigate([this.categoryItem ? routeCreator.chartCategory(this.categoryItem) : routeCreator.main()])
   }
 
   protected readonly symbols = symbols;

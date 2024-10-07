@@ -25,19 +25,21 @@ export class MainComponent implements OnInit, OnDestroy {
     private service: ChartCategoriesService,
     private router: Router
   ) {
+    this.onMainClick = this.onMainClick.bind(this)
   }
 
   ngOnInit(): void {
     this.initChartCategories()
     this.twa.visibleBackButton(false)
     this.twa.setMainButton(
-        {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
-        () => this.onMainClick()
+      {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
+      this.onMainClick
     )
   }
 
   ngOnDestroy(): void {
-    this.twa.visibleMainButton(false)
+    this.twa.offMainButton(this.onMainClick)
+    this.twa.close()
   }
 
   private onMainClick() {
@@ -46,7 +48,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   private initChartCategories() {
     this.service.list(new ChartCategoriesFilter({})).subscribe(
-        items => this.chartCategories = items
+      items => this.chartCategories = items
     )
   }
 
