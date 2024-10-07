@@ -31,7 +31,11 @@ export class EditComponent implements OnInit, OnDestroy {
   protected transactionForm: FormGroup = this.formBuilder.group({})
 
   ngOnInit() {
-    this.twa.backButton(() => this.router.navigateByUrl(this._backUrl))
+    this.activatedRoute.data
+      .subscribe((data: any) => {
+        this.transactionItem = data.transactionItem
+        this.twa.backButton(() => this.router.navigateByUrl(this._backUrl))
+      })
     this.twa.setSecondaryButton(
       {text: 'Delete', is_visible: true, is_active: true, has_shine_effect: false, position: 'left'},
       () => this.delete(),
@@ -40,14 +44,11 @@ export class EditComponent implements OnInit, OnDestroy {
       {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
       () => this.save(),
     )
-
-    this.activatedRoute.data
-      .subscribe((data: any) => this.transactionItem = data.categoryItem)
+    this.transactionForm.statusChanges
+      .subscribe((status: FormControlStatus) => this.twa.mainButtonIsActive(status == "VALID"))
   }
 
   ngOnDestroy(): void {
-    this.transactionForm.statusChanges
-      .subscribe((status: FormControlStatus) => this.twa.mainButtonIsActive(status == "VALID"))
     this.twa.visibleBackButton(false)
     this.twa.visibleSecondaryButton(false)
     this.twa.visibleMainButton(false)
