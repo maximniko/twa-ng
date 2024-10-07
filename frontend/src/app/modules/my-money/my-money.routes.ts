@@ -50,7 +50,7 @@ export const myMoneyRoutes: Routes = [
       {
         path: `${ROUTE_PARTS.transactions}/:id/edit`,
         loadComponent: () => import('./components/transactions/edit/edit.component').then(mod => mod.EditComponent),
-        resolve: {categoryItem: transactionItemResolver},
+        resolve: {transactionItem: transactionItemResolver},
       },
     ],
   },
