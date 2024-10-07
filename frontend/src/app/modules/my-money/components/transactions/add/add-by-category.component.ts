@@ -27,10 +27,7 @@ export class AddByCategoryComponent extends AddComponent {
   ) {
     super(twa, router, formBuilder, service);
     this.activatedRoute.data
-      .subscribe((data: any) => {
-        this.categoryItem = data.categoryItem
-        console.log(this.categoryItem)
-      })
+      .subscribe((data: any) => {this.categoryItem = data.categoryItem})
   }
 
   override goBack() {

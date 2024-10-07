@@ -29,11 +29,11 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.twa.backButtonOnClick(this.goToCategories)
     this.twa.setSecondaryButton(
       {text: 'Edit', is_visible: true, is_active: true, position: 'right'},
-      this.goToMain,
+      () => this.goToMain(),
     )
     this.twa.setMainButton(
       {text: 'Main', is_visible: true, is_active: true},
-      this.goToMain,
+      () => this.goToMain(),
     )
   }
 

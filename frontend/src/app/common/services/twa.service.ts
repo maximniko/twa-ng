@@ -29,21 +29,21 @@ export class TwaService {
 
   offMainButton(offClick: VoidFunction, show: boolean = false) {
     WebApp.MainButton.offClick(offClick)
-    this._buttonVisible(WebApp.MainButton, show)
+    this.buttonVisible(WebApp.MainButton, show)
   }
 
   offSecondaryButton(offClick: VoidFunction, show: boolean = true) {
     WebApp.SecondaryButton.offClick(offClick)
-    this._buttonVisible(WebApp.SecondaryButton, show)
+    this.buttonVisible(WebApp.SecondaryButton, show)
   }
 
   offBackButton(cb: VoidFunction, show: boolean = true) {
     WebApp.BackButton.offClick(cb)
-    this._buttonVisible(WebApp.BackButton, show)
+    this.buttonVisible(WebApp.BackButton, show)
   }
 
   visibleBackButton(show: boolean) {
-    this._buttonVisible(WebApp.BackButton, show)
+    this.buttonVisible(WebApp.BackButton, show)
   }
 
   backButtonOnClick(cb: VoidFunction) {
@@ -72,14 +72,14 @@ export class TwaService {
   }
 
   visibleMainButton(show: boolean) {
-    this._buttonVisible(WebApp.MainButton, show)
+    this.buttonVisible(WebApp.MainButton, show)
   }
 
   mainButtonIsActive(isActive: boolean) {
     isActive ? WebApp.MainButton.enable() : WebApp.MainButton.disable()
   }
 
-  private _buttonVisible(button: ButtonVisible, show: boolean) {
+  private buttonVisible(button: ButtonVisible, show: boolean) {
     show ? button.show() : button.hide()
   }
 
