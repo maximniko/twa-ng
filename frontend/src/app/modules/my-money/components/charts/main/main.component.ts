@@ -41,7 +41,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.twa.offMainButton(this.onMainClick)
   }
 
-  private onMainClick() {
+  onMainClick() {
     this.router.navigate([routeCreator.transactionAdd()])
   }
 
