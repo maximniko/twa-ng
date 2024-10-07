@@ -32,12 +32,12 @@ export class MainComponent implements OnInit, OnDestroy {
     this.twa.visibleBackButton(false)
     this.twa.setMainButton(
       {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
-      () => this.onMainClick
+      () => this.onMainClick()
     )
   }
 
   ngOnDestroy(): void {
-    this.twa.offMainButton(() => this.onMainClick)
+    this.twa.offMainButton(() => this.onMainClick())
   }
 
   onMainClick() {

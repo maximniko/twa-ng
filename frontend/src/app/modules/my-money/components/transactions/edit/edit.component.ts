@@ -34,22 +34,22 @@ export class EditComponent implements OnInit, OnDestroy {
     this.activatedRoute.data
       .subscribe((data: any) => {
         this.transactionItem = data.transactionItem
-        this.twa.backButtonOnClick(() => this.goBack)
+        this.twa.backButtonOnClick(() => this.goBack())
       })
     this.twa.setSecondaryButton(
       {text: 'Delete', is_visible: true, is_active: true, has_shine_effect: false, position: 'left'},
-      () => this.delete,
+      () => this.delete(),
     )
     this.twa.setMainButton(
       {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
-      () => this.save,
+      () => this.save(),
     )
   }
 
   ngOnDestroy(): void {
-    this.twa.offBackButton(() => this.goBack, false)
-    this.twa.offMainButton(() => this.save)
-    this.twa.offSecondaryButton(() => this.delete, false)
+    this.twa.offBackButton(() => this.goBack())
+    this.twa.offMainButton(() => this.save())
+    this.twa.offSecondaryButton(() => this.delete(), false)
   }
 
   protected save() {
