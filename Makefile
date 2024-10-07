@@ -7,5 +7,5 @@ frontend-ng-init:
 gh-pages:
 	docker compose -f ./docker-compose.yml run --rm node ng build --configuration production --base-href https://maximniko.github.io/twa-ng/
 	rm -fdr ./docs/*
-	cp ./frontend/dist/frontend/browser/* docs
+	cp -r ./frontend/dist/frontend/browser/* docs
 	git add ./docs/*
