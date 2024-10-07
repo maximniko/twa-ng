@@ -7,6 +7,7 @@ import {CategoryInputsComponent} from "../_form/category-inputs.component";
 import {Category} from "../../../domains/categories/interfaces/category";
 import {CategoriesService} from "../../../domains/categories/services/categories.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {Subscription} from "rxjs";
 
 @Component({
   standalone: true,
@@ -26,6 +27,7 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   protected categoryForm: FormGroup = this.formBuilder.group({})
+  protected serviceSubscription?: Subscription
 
   ngOnInit() {
     this.twa.backButtonOnClick(() => this.router.navigate([routeCreator.chartCategory(this.categoryItem)]))
@@ -44,12 +46,13 @@ export class EditComponent implements OnInit, OnDestroy {
     }
 
     const newCategory: Category = this.categoryForm.value
-    this.service.edit(Object.assign(this.categoryItem, newCategory)).subscribe(
+    this.serviceSubscription = this.service.edit(Object.assign(this.categoryItem, newCategory)).subscribe(
       (category: Category) => this.router.navigate([routeCreator.chartCategory(category)])
     )
   }
 
   ngOnDestroy(): void {
     this.twa.visibleMainButton(false)
+    this.serviceSubscription?.unsubscribe()
   }
 }

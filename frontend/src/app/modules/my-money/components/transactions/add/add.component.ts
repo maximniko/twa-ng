@@ -10,6 +10,7 @@ import {TransactionsService} from "../../../domains/transactions/services/transa
 import {FormTransaction, Transaction} from "../../../domains/transactions/interfaces/transaction";
 import {symbols} from "../../../../../common/components/symbols/symbols";
 import {Category} from "../../../domains/categories/interfaces/category";
+import {Subscription} from "rxjs";
 
 @Component({
   standalone: true,
@@ -28,15 +29,20 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
   }
 
   protected transactionForm: FormGroup = this.formBuilder.group({})
+  protected transactionFormSubscription?: Subscription
+  protected serviceSubscription?: Subscription
 
   ngOnInit() {
-    this.transactionForm.statusChanges
+    this.transactionFormSubscription = this.transactionForm.statusChanges
       .subscribe((status: FormControlStatus) => this.twa.mainButtonIsActive(status == "VALID"))
     this.twa.backButtonOnClick(() => this.goBack())
     this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, () => this.add())
   }
 
   ngOnDestroy(): void {
+    this.transactionFormSubscription?.unsubscribe()
+    this.serviceSubscription?.unsubscribe()
+    this.twa.mainButtonIsActive(true)
     this.twa.offBackButton(() => this.goBack())
     this.twa.offMainButton(() => this.add())
   }
@@ -47,7 +53,7 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
     }
 
     const form: FormTransaction = this.transactionForm.value
-    this.service.create(form).subscribe(
+    this.serviceSubscription = this.service.create(form).subscribe(
       (transaction: Transaction) => this.router.navigate([routeCreator.chartCategory(transaction.category)])
     )
   }

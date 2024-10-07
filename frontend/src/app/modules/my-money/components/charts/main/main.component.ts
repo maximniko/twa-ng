@@ -10,6 +10,7 @@ import {ChartCategoriesService} from "../../../domains/charts/services/chart-cat
 import {ChartCategory} from "../../../domains/charts/interfaces/chart-category";
 import {SelectorComponent} from "../../_layout/period/selector.component";
 import {PaginationComponent} from "../../_layout/period/pagination.component";
+import {Subscription} from "rxjs";
 
 @Component({
   standalone: true,
@@ -19,6 +20,7 @@ import {PaginationComponent} from "../../_layout/period/pagination.component";
 })
 export class MainComponent implements OnInit, OnDestroy {
   protected chartCategories: ChartCategory[] = []
+  protected serviceSubscription?: Subscription
 
   constructor(
     protected twa: TwaService,
@@ -38,6 +40,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.twa.offMainButton(() => this.onMainClick())
+    this.serviceSubscription?.unsubscribe()
   }
 
   onMainClick() {
@@ -45,7 +48,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   private initChartCategories() {
-    this.service.list(new ChartCategoriesFilter({})).subscribe(
+    this.serviceSubscription = this.service.list(new ChartCategoriesFilter({})).subscribe(
       items => this.chartCategories = items
     )
   }

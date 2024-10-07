@@ -11,6 +11,7 @@ import {TransactionsService} from "../../../domains/transactions/services/transa
 import {TransactionsFilter} from "../../../domains/transactions/services/transactions-filter";
 import {DoughnutComponent} from "../_includes/chart-transactions/chart/doughnut.component";
 import {ListComponent} from "../_includes/chart-transactions/list/list.component";
+import {Subscription} from "rxjs";
 
 @Component({
   standalone: true,
@@ -22,6 +23,7 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
   title!: string
   categoryItem!: Category
   transactions: Transaction[] = []
+  private serviceSubscription?: Subscription
 
   constructor(
     protected twa: TwaService,
@@ -33,8 +35,8 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
       .subscribe(
         (data: any) => {
           this.categoryItem = data['categoryItem']
-          this.service.list(new TransactionsFilter({categoryId: this.categoryItem.id}))
-              .subscribe(items => this.transactions = items)
+          this.serviceSubscription = this.service.list(new TransactionsFilter({categoryId: this.categoryItem.id}))
+            .subscribe(items => this.transactions = items)
         }
       )
   }
@@ -48,6 +50,7 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.serviceSubscription?.unsubscribe()
     this.twa.offMainButton(() => this.onMainClick())
     this.twa.offBackButton(() => this.goBack())
   }
