@@ -28,7 +28,7 @@ export class ListComponent implements OnInit, OnDestroy {
         this.categories = items
       }
     )
-    this.twa.backButton(() => this.router.navigate([routeCreator.main()]))
+    this.twa.backButtonOnClick(() => this.router.navigate([routeCreator.main()]))
     this.twa.setMainButton(
       {text: "Add Category", is_active: true, is_visible: true, has_shine_effect: true},
       () => this.onMainClick()

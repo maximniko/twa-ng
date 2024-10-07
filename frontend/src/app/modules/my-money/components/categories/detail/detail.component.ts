@@ -19,24 +19,35 @@ export class DetailComponent implements OnInit, OnDestroy {
     private twa: TwaService,
     private router: Router
   ) {
+    this.goToMain = this.goToMain.bind(this)
+    this.goToCategories = this.goToCategories.bind(this)
   }
 
   ngOnInit() {
     this.activatedRoute.data
       .subscribe((data: any) => this.categoryItem = data['categoryItem'])
-    this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
+    this.twa.backButtonOnClick(this.goToCategories)
     this.twa.setSecondaryButton(
       {text: 'Edit', is_visible: true, is_active: true, position: 'right'},
-      () => this.router.navigate([routeCreator.main()]),
+      this.goToMain,
     )
     this.twa.setMainButton(
-      {text: 'Edit', is_visible: true, is_active: true},
-      () => this.router.navigate([routeCreator.main()]),
+      {text: 'Main', is_visible: true, is_active: true},
+      this.goToMain,
     )
   }
 
+  goToMain() {
+    this.router.navigate([routeCreator.main()])
+  }
+
+  goToCategories() {
+    this.router.navigate([routeCreator.categories()])
+  }
+
   ngOnDestroy() {
-    this.twa.visibleSecondaryButton(false)
-    this.twa.visibleMainButton(false)
+    this.twa.offBackButton(this.goToCategories)
+    this.twa.offSecondaryButton(this.goToMain)
+    this.twa.offMainButton(this.goToMain)
   }
 }
