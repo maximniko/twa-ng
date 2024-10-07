@@ -7,7 +7,7 @@
       </svg>
     </div>
   </div>
-  <form [formGroup]="transactionForm" (ngSubmit)="save()" class="p-3">
+  <form [formGroup]="transactionForm" (ngSubmit)="edit()" class="p-3">
     <transaction-inputs [parentForm]="transactionForm" [transactionItem]="transactionItem"></transaction-inputs>
   </form>
 </section>
