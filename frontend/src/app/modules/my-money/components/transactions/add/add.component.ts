@@ -33,15 +33,15 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
     this.transactionForm.statusChanges
       .subscribe((status: FormControlStatus) => this.twa.mainButtonIsActive(status == "VALID"))
     this.twa.backButtonOnClick(() => this.goBack())
-    this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, () => this.submit())
+    this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, () => this.add())
   }
 
   ngOnDestroy(): void {
     this.twa.offBackButton(() => this.goBack())
-    this.twa.offMainButton(() => this.submit())
+    this.twa.offMainButton(() => this.add())
   }
 
-  submit() {
+  add() {
     if (this.transactionForm.invalid) {
       return
     }

@@ -41,18 +41,18 @@ export class EditComponent implements OnInit, OnDestroy {
       () => this.delete(),
     )
     this.twa.setMainButton(
-      {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
-      () => this.save(),
+      {text: 'Edit', is_visible: true, is_active: true, has_shine_effect: true},
+      () => this.edit(),
     )
   }
 
   ngOnDestroy(): void {
     this.twa.offBackButton(() => this.goBack())
-    this.twa.offMainButton(() => this.save())
+    this.twa.offMainButton(() => this.edit())
     this.twa.offSecondaryButton(() => this.delete(), false)
   }
 
-  protected save() {
+  protected edit() {
     if (this.transactionForm.invalid) {
       return
     }
