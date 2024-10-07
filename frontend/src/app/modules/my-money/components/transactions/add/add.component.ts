@@ -54,7 +54,10 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
 
     const form: FormTransaction = this.transactionForm.value
     this.serviceSubscription = this.service.create(form).subscribe(
-      (transaction: Transaction) => this.router.navigate([routeCreator.chartCategory(transaction.category)])
+      (transaction: Transaction) => {
+        this.transactionForm.reset()
+        this.router.navigate([routeCreator.chartCategory(transaction.category)])
+      }
     )
   }
 

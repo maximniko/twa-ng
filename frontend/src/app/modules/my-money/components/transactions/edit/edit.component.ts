@@ -35,7 +35,9 @@ export class EditComponent implements OnInit, OnDestroy {
   protected transactionForm: FormGroup = this.formBuilder.group({})
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe((data: any) => {this.transactionItem = data.transactionItem})
+    this.activatedRoute.data.subscribe((data: any) => {
+      this.transactionItem = data.transactionItem
+    })
     this.transactionFormSubscription = this.transactionForm.statusChanges
       .subscribe((status: FormControlStatus) => this.twa.mainButtonIsActive(status == "VALID"))
 
@@ -68,7 +70,10 @@ export class EditComponent implements OnInit, OnDestroy {
     const form: FormTransaction = this.transactionForm.value
     form.id = this.transactionItem.id
     this.serviceSubscription = this.service.edit(form)
-      .subscribe(() => this.router.navigateByUrl(this._backUrl))
+      .subscribe(() => {
+        this.transactionForm.reset()
+        this.router.navigateByUrl(this._backUrl)
+      })
   }
 
   private delete() {

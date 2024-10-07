@@ -80,6 +80,7 @@ export class TwaService {
 
   mainButtonIsActive(isActive: boolean) {
     isActive ? WebApp.MainButton.enable() : WebApp.MainButton.disable()
+    this.buttonVisible(WebApp.MainButton, isActive)
   }
 
   private buttonVisible(button: ButtonVisible, show: boolean) {
