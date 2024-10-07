@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {routeCreator} from "../../../my-money.routes";
 import {TransactionInputsComponent} from "../_form/transaction-inputs.component";
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormControlStatus, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {FormTransaction, Transaction} from "../../../domains/transactions/interfaces/transaction";
 import {TransactionsService} from "../../../domains/transactions/services/transactions.service";
 import {HttpStatusCode} from "@angular/common/http";
@@ -46,7 +46,9 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.twa.backButton(() => this.router.navigateByUrl(this._backUrl))
+    this.transactionForm.statusChanges
+      .subscribe((status: FormControlStatus) => this.twa.mainButtonIsActive(status == "VALID"))
+    this.twa.visibleBackButton(false)
     this.twa.visibleSecondaryButton(false)
     this.twa.visibleMainButton(false)
   }
@@ -74,7 +76,7 @@ export class EditComponent implements OnInit, OnDestroy {
     )
   }
 
-  private get _backUrl(): string {
+  protected get _backUrl(): string {
     return routeCreator.chartCategory(this.transactionItem.category)
   }
 
