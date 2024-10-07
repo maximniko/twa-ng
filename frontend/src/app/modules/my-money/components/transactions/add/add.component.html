@@ -8,6 +8,6 @@
     </div>
   </div>
   <form [formGroup]="transactionForm" (ngSubmit)="submit()" class="p-3">
-    <transaction-inputs [parentForm]="transactionForm"></transaction-inputs>
+    <transaction-inputs [parentForm]="transactionForm" [categoryItem]="categoryItem"></transaction-inputs>
   </form>
 </section>

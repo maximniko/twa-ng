@@ -3,6 +3,7 @@ import {categoryItemResolver} from "./domains/categories/resolvers/category-item
 import {Category} from "./domains/categories/interfaces/category";
 import {transactionItemResolver} from "./domains/transactions/resolvers/transaction-item-resolver";
 import {Transaction} from "./domains/transactions/interfaces/transaction";
+import {AddByCategoryComponent} from "./components/transactions/add/add-by-category.component";
 
 const ROUTE_PARTS = {
   myMoney: 'my-money',
@@ -22,6 +23,7 @@ export const routeCreator = {
   transactions: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}`,
   transactionEdit: (transaction: Transaction) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}/${transaction.id}/edit`,
   transactionAdd: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}/add`,
+  transactionAddByCategory: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.transactions}/add/by-category/${category.id}`,
 }
 
 export const myMoneyRoutes: Routes = [
@@ -46,6 +48,11 @@ export const myMoneyRoutes: Routes = [
       {
         path: `${ROUTE_PARTS.transactions}/add`,
         loadComponent: () => import('./components/transactions/add/add.component').then(mod => mod.AddComponent),
+      },
+      {
+        path: `${ROUTE_PARTS.transactions}/add/by-category/:id`,
+        loadComponent: () => import('./components/transactions/add/add-by-category.component').then(mod => mod.AddByCategoryComponent),
+        resolve: {categoryItem: categoryItemResolver},
       },
       {
         path: `${ROUTE_PARTS.transactions}/:id/edit`,

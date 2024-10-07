@@ -10,7 +10,6 @@ import {
   Validators
 } from "@angular/forms";
 import {Transaction} from "../../../domains/transactions/interfaces/transaction";
-import {InValidator} from "../../../../../common/extensions/Validators";
 import {TagInputComponent} from "./components/tag-input.component";
 import {DateInputComponent} from "./components/date-input.component";
 import {Category} from "../../../domains/categories/interfaces/category";
@@ -26,6 +25,7 @@ import {CategoriesFilter} from "../../../domains/categories/services/categories-
 })
 export class TransactionInputsComponent extends ReactiveForm implements OnInit {
   @Input() transactionItem?: Transaction | undefined
+  @Input() categoryItem?: Category | undefined
   @Input() parentForm!: FormGroup
 
   categoriesList: Category[] = []
@@ -46,18 +46,22 @@ export class TransactionInputsComponent extends ReactiveForm implements OnInit {
     ]))
   }
 
-  protected compareCategory(a: Category,b: Category): boolean {
-    return a.id == b.id
+  protected compareCategory(a?: Category, b?: Category): boolean {
+    if (a && b) {
+      return a.id == b.id
+    }
+    return false
   }
+
   private addControlCategory() {
     this.categoriesService.list(new CategoriesFilter({}))
       .subscribe(items => {
         this.categoriesList = items
 
-        this.parentForm.addControl('category', this.formBuilder.control(this.transactionItem?.category, [
-          Validators.required,
-          InValidator(this.categoriesList)
-        ]))
+        this.parentForm.addControl('category', this.formBuilder.control(
+          this.transactionItem?.category ?? this.categoryItem,
+          [Validators.required],
+        ))
       })
   }
 
