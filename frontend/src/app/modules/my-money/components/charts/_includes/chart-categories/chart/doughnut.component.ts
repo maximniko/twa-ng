@@ -21,11 +21,20 @@ export class DoughnutComponent implements OnInit {
   @Input() chartCategories: ChartCategory[] = []
   protected doughnutChartLabels: string[] = [];
   protected doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [];
-
   public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
     animation: {
       animateRotate: true,
       animateScale: true,
+    },
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          font: {
+            size: 16,
+          }
+        }
+      }
     },
     responsive: true,
   };
