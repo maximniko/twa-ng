@@ -1,8 +1,12 @@
-export function toLocalDate(date: Date, locale: Intl.LocalesArgument): string {
-  return date.toLocaleDateString(locale, {
+export function toLocalDate(
+  date: Date,
+  locale: Intl.LocalesArgument,
+  options: Intl.DateTimeFormatOptions = {
     month: 'short',
     day: 'numeric',
-  })
+  },
+): string {
+  return date.toLocaleDateString(locale, options)
 }
 
 export function toParamDate(date: Date): string {
@@ -15,4 +19,5 @@ export function toParamDate(date: Date): string {
     day = '0' + day
   }
 
-  return `${date.getFullYear()}-${month}-${day}`}
+  return `${date.getFullYear()}-${month}-${day}`
+}
