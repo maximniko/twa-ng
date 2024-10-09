@@ -27,6 +27,16 @@ export class DoughnutComponent implements OnInit {
       animateRotate: true,
       animateScale: true,
     },
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          font: {
+            size: 16,
+          }
+        }
+      }
+    },
     responsive: true,
   };
 
