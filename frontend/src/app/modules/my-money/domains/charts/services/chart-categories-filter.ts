@@ -1,7 +1,7 @@
 import {HttpParams} from "@angular/common/http";
 import {HttpParamsOptionsFromObject} from "../../../../../common/components/filters/interfaces/filter-interface";
 import {ChartCategory} from "../interfaces/chart-category";
-import {ifEmpty} from "../../../../../common/extensions/Object";
+import {toParamDate} from "../../../../../common/extensions/Date";
 
 export class ChartCategoriesFilter {
   constructor(private params: {
@@ -18,10 +18,10 @@ export class ChartCategoriesFilter {
       fromObject['categoryId'] = this.params.categoryId
     }
     if (this.params.from) {
-      fromObject['from'] = this.params.from.toISOString()
+      fromObject['from'] = toParamDate(this.params.from)
     }
     if (this.params.to) {
-      fromObject['to'] = this.params.to.toISOString()
+      fromObject['to'] = toParamDate(this.params.to)
     }
 
     return new HttpParams({fromObject: fromObject})
@@ -32,6 +32,6 @@ export class ChartCategoriesFilter {
       return item.category.id == this.params.categoryId
     }
 
-    return ifEmpty(this.params)
+    return this.params.categoryId == undefined
   }
 }

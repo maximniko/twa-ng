@@ -2,11 +2,11 @@ import {HttpParams} from "@angular/common/http";
 import {HttpParamsOptionsFromObject} from "../../../../../common/components/filters/interfaces/filter-interface";
 import {Transaction} from "../interfaces/transaction";
 import {ifEmpty} from "../../../../../common/extensions/Object";
+import {toParamDate} from "../../../../../common/extensions/Date";
 
 export class TransactionsFilter {
   constructor(private params: {
     id?: number,
-    tagId?: number,
     categoryId?: number,
     from?: Date,
     to?: Date,
@@ -19,14 +19,14 @@ export class TransactionsFilter {
     if (this.params.id) {
       fromObject['id'] = this.params.id
     }
-    if (this.params.tagId) {
-      fromObject['tagId'] = this.params.tagId
-    }
     if (this.params.categoryId) {
       fromObject['categoryId'] = this.params.categoryId
     }
     if (this.params.from) {
-      fromObject['from'] = this.params.from.toISOString()
+      fromObject['from'] = toParamDate(this.params.from)
+    }
+    if (this.params.to) {
+      fromObject['to'] = toParamDate(this.params.to)
     }
 
     return new HttpParams({fromObject: fromObject})
@@ -35,9 +35,6 @@ export class TransactionsFilter {
   filter(item: Transaction): boolean {
     if (this.params.id) {
       return item.id == this.params.id
-    }
-    if (this.params.tagId) {
-      return item.tag.id == this.params.tagId
     }
     if (this.params.categoryId) {
       return item.category.id == this.params.categoryId

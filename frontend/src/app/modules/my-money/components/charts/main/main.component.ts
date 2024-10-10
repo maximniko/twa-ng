@@ -10,7 +10,9 @@ import {ChartCategoriesService} from "../../../domains/charts/services/chart-cat
 import {ChartCategory} from "../../../domains/charts/interfaces/chart-category";
 import {SelectorComponent} from "../../_layout/period/selector.component";
 import {PaginationComponent} from "../../_layout/period/pagination.component";
-import {Subscription} from "rxjs";
+import {debounceTime, Subscription} from "rxjs";
+import {FilterService} from "../../../domains/charts/services/filter.service";
+import {FromTo} from "../../../domains/charts/interfaces/from-to";
 
 @Component({
   standalone: true,
@@ -20,17 +22,23 @@ import {Subscription} from "rxjs";
 })
 export class MainComponent implements OnInit, OnDestroy {
   protected chartCategories: ChartCategory[] = []
-  protected serviceSubscription?: Subscription
+  protected filterSubscription?: Subscription
 
   constructor(
     protected twa: TwaService,
+    protected filter: FilterService,
     protected service: ChartCategoriesService,
     protected router: Router
   ) {
   }
 
   ngOnInit(): void {
-    this.initChartCategories()
+    this.loadChartCategories(this.filter.fromTo)
+
+    this.filterSubscription = this.filter.nextFromTo
+      .pipe(debounceTime(1000))
+      .subscribe((fromTo: FromTo) => this.loadChartCategories(fromTo))
+
     this.twa.visibleBackButton(false)
     this.twa.setMainButton(
       {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
@@ -40,17 +48,16 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.twa.offMainButton(() => this.onMainClick())
-    this.serviceSubscription?.unsubscribe()
+    this.filterSubscription?.unsubscribe()
   }
 
   onMainClick() {
     this.router.navigate([routeCreator.transactionAdd()])
   }
 
-  private initChartCategories() {
-    this.serviceSubscription = this.service.list(new ChartCategoriesFilter({})).subscribe(
-      items => this.chartCategories = items
-    )
+  private loadChartCategories(fromTo: FromTo) {
+    this.service.list(new ChartCategoriesFilter(fromTo))
+      .subscribe(items => this.chartCategories = items)
   }
 
   protected readonly routeCreator = routeCreator;
