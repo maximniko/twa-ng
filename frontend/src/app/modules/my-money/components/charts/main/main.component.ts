@@ -13,6 +13,7 @@ import {PaginationComponent} from "../../_layout/period/pagination.component";
 import {debounceTime, Subscription} from "rxjs";
 import {FilterService} from "../../../domains/charts/services/filter.service";
 import {FromTo} from "../../../domains/charts/interfaces/from-to";
+import {Localisation} from "../../../../../common/services/localisation";
 
 @Component({
   standalone: true,
@@ -27,6 +28,7 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(
     protected twa: TwaService,
     protected filter: FilterService,
+    protected localisation: Localisation,
     protected service: ChartCategoriesService,
     protected router: Router
   ) {
