@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {FilterService, Period} from "../../../domains/settings/filter.service";
+import {FilterService, Period} from "../../../domains/charts/services/filter.service";
 import {FormsModule} from "@angular/forms";
 
 @Component({

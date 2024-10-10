@@ -1,20 +1,29 @@
 import {Injectable} from "@angular/core";
 import {clone} from "chart.js/helpers";
+import {Subject} from "rxjs";
+import {FromTo} from "../interfaces/from-to";
 
 @Injectable({providedIn: 'root'})
 export class FilterService {
+  nextFromTo: Subject<FromTo> = new Subject<FromTo>
   public page: number = 0
+  public maxPage: number = 12
   public _period: Period = Period.day;
   public get period() {
     return this._period
+  }
+
+  resetPage() {
+    this.page = 0
+    this.nextFromTo.next(this.fromTo)
   }
 
   public set period(period: Period) {
     if (period == this._period) {
       return
     }
-    this.page = 0
     this._period = period;
+    this.resetPage()
   }
 
   private format: Intl.DateTimeFormatOptions = {
@@ -23,12 +32,16 @@ export class FilterService {
   }
 
   pageNext(): void {
-    this.page += 1
+    if (this.page < this.maxPage) {
+      this.page += 1
+      this.nextFromTo.next(this.fromTo)
+    }
   }
 
   pagePrev(): void {
     if (this.page > 0) {
       this.page -= 1
+      this.nextFromTo.next(this.fromTo)
     }
   }
 
@@ -86,11 +99,14 @@ export class FilterService {
         return 'This month';
     }
   }
-}
 
-interface FromTo {
-  from: Date,
-  to: Date
+  isLastPage(): boolean {
+    return this.page >= this.maxPage
+  }
+
+  isFirstPage(): boolean {
+    return this.page < 1
+  }
 }
 
 export enum Period {
