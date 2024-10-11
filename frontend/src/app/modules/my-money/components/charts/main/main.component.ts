@@ -14,7 +14,7 @@ import {debounceTime, Subscription} from "rxjs";
 import {FilterService} from "../../../domains/charts/services/filter.service";
 import {FromTo} from "../../../domains/charts/interfaces/from-to";
 import {Localisation} from "../../../../../common/services/localisation";
-import {IntroComponent} from "./intro/intro.component";
+import {IntroComponent} from "../../_layout/intro/intro.component";
 
 @Component({
   standalone: true,

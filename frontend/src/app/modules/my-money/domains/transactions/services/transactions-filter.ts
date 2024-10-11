@@ -1,7 +1,6 @@
 import {HttpParams} from "@angular/common/http";
 import {HttpParamsOptionsFromObject} from "../../../../../common/components/filters/interfaces/filter-interface";
 import {Transaction} from "../interfaces/transaction";
-import {ifEmpty} from "../../../../../common/extensions/Object";
 import {toParamDate} from "../../../../../common/extensions/Date";
 
 export class TransactionsFilter {
@@ -39,10 +38,7 @@ export class TransactionsFilter {
     if (this.params.categoryId) {
       return item.category.id == this.params.categoryId
     }
-    if (this.params.categoryId) {
-      return item.category.id == this.params.categoryId
-    }
 
-    return ifEmpty(this.params)
+    return this.params.categoryId == undefined
   }
 }

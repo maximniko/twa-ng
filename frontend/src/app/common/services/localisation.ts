@@ -26,4 +26,6 @@ type Texts = {
   [key in Key]?: string | undefined;
 }
 
-export type Key = "hello" | "mainCalculations" | "bye"
+export type Key = "transactions"
+  | "mainCalculations"
+  | "bye"

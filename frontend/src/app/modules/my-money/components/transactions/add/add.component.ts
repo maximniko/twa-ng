@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, Location} from '@angular/common';
 import {Router} from "@angular/router";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {routeCreator} from "../../../my-money.routes";
@@ -23,6 +23,7 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
     protected twa: TwaService,
     protected router: Router,
     protected formBuilder: FormBuilder,
+    protected location: Location,
     protected service: TransactionsService
   ) {
     super();
@@ -62,7 +63,7 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.router.navigate([routeCreator.main()])
+    this.location.back()
   }
 
   protected readonly symbols = symbols;

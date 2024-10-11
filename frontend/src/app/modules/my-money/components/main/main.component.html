@@ -1,0 +1,30 @@
+@if (transactions.length) {
+  <section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
+    <div class="hstack p-3 pb-0">
+      <span class="m-auto text-center h5">{{ localisation.t.transactions ?? 'Transactions' }}</span>
+      <period-selector></period-selector>
+    </div>
+    <div class="card-body p-2 my-3">
+      <div class="p-3 rounded-3 bg-secondary">
+        <div class="progress"
+             role="progressbar"
+             aria-label="Example with label"
+             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar bg-primary" style="width: 25%">25%</div>
+          <div class="progress-bar bg-success" style="width: 75%">75%</div>
+        </div>
+        <div class="jcb pt-3">
+          <div>Потрачено: 200</div>
+          <div>Доступно: 600</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body p-2">
+      <transactions-list [transactions]="transactions"></transactions-list>
+    </div>
+  </section>
+} @else {
+  <div class="m-auto">
+    <main-intro></main-intro>
+  </div>
+}

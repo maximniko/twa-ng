@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TwaService} from "../../../../../../common/services/twa.service";
+import {TwaService} from "../../../../../common/services/twa.service";
 
 @Component({
   selector: 'main-intro',

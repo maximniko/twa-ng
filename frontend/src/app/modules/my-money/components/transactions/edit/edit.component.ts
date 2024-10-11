@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, Location} from '@angular/common';
 import {ActivatedRoute, Router} from "@angular/router";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {routeCreator} from "../../../my-money.routes";
@@ -23,6 +23,7 @@ export class EditComponent implements OnInit, OnDestroy {
   constructor(
     protected activatedRoute: ActivatedRoute,
     protected twa: TwaService,
+    protected location: Location,
     protected router: Router,
     protected formBuilder: FormBuilder,
     protected service: TransactionsService
@@ -72,7 +73,7 @@ export class EditComponent implements OnInit, OnDestroy {
     this.serviceSubscription = this.service.edit(form)
       .subscribe(() => {
         this.transactionForm.reset()
-        this.router.navigateByUrl(this._backUrl)
+        this.goBack()
       })
   }
 
@@ -89,11 +90,7 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.router.navigate([this._backUrl])
-  }
-
-  protected get _backUrl(): string {
-    return routeCreator.chartCategory(this.transactionItem.category)
+    this.location.back()
   }
 
   protected readonly symbols = symbols;

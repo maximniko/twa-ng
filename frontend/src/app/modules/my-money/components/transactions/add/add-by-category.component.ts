@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, Location} from '@angular/common';
 import {ActivatedRoute, Router} from "@angular/router";
 import {TwaService} from "../../../../../common/services/twa.service";
-import {routeCreator} from "../../../my-money.routes";
 import {TransactionInputsComponent} from "../_form/transaction-inputs.component";
 import {Category} from "../../../domains/categories/interfaces/category";
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
@@ -22,15 +21,12 @@ export class AddByCategoryComponent extends AddComponent {
     private activatedRoute: ActivatedRoute,
     protected override twa: TwaService,
     protected override router: Router,
+    protected override location: Location,
     override formBuilder: FormBuilder,
     override service: TransactionsService
   ) {
-    super(twa, router, formBuilder, service);
+    super(twa, router, formBuilder, location, service);
     this.activatedRoute.data
       .subscribe((data: any) => {this.categoryItem = data.categoryItem})
-  }
-
-  override goBack() {
-    this.router.navigate([routeCreator.chartCategory(this.categoryItem)])
   }
 }
