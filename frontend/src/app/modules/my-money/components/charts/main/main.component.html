@@ -1,4 +1,4 @@
-@if (chartCategories.length) {
+@if (chartCategories.length && false) {
   <section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
     <div class="hstack p-3 pb-0">
       <span class="m-auto text-center h5">{{ localisation.t.mainCalculations ?? 'Calculations' }}</span>
@@ -13,7 +13,10 @@
     <period-pagination></period-pagination>
   </section>
 } @else {
-  <div class="m-auto spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
+  <div class="m-auto">
+    <div class="m-3 mb-5 text-center">
+      <h5>Следи за своими финансами <span class="h1 color-accent">легко</span></h5>
+      <p><span class="h1 color-accent">Управляй</span> бюджетом, отслеживай расходы <span class="h1 color-accent">и достигай</span> финансовых <span class="h1 color-accent">целей</span>.</p>
+    </div>
   </div>
 }
