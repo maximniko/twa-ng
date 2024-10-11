@@ -14,10 +14,11 @@ import {debounceTime, Subscription} from "rxjs";
 import {FilterService} from "../../../domains/charts/services/filter.service";
 import {FromTo} from "../../../domains/charts/interfaces/from-to";
 import {Localisation} from "../../../../../common/services/localisation";
+import {IntroComponent} from "./intro/intro.component";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, DoughnutComponent, ListComponent, SelectorComponent, PaginationComponent],
+  imports: [CommonModule, DoughnutComponent, ListComponent, SelectorComponent, PaginationComponent, IntroComponent],
   templateUrl: './main.component.html',
   host: {class: 'd-flex flex-column h-100'},
 })

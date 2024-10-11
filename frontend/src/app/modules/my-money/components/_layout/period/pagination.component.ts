@@ -18,7 +18,9 @@ import {FilterService} from "../../../domains/charts/services/filter.service";
             </svg>
           </span>
         </li>
-        <li class="w-100 text-center"><a href="#" class="page-link color-accent">{{ filter.getPeriodString() }}</a></li>
+        <li class="w-100 text-center text-truncate">
+          <span (click)="filter.resetPage()" class="page-link color-accent mx-auto px-0">{{ filter.getPeriodString() }}</span>
+        </li>
         <li class="page-item" [ngClass]="{'disabled': filter.isFirstPage()}">
           <span class="page-link color-accent" (click)="filter.pagePrev()" >
             <svg class="bi">
