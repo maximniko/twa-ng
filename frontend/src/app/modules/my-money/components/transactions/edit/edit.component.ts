@@ -47,7 +47,7 @@ export class EditComponent implements OnInit, OnDestroy {
       () => this.delete(),
     )
     this.twa.setMainButton(
-      {text: 'Edit', is_visible: true, is_active: true, has_shine_effect: true},
+      {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
       () => this.edit(),
     )
   }

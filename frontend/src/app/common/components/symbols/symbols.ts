@@ -1,6 +1,7 @@
 export const symbols = {
   chevronLeft: "chevron-left",
   chevronRight: "chevron-right",
+  house: "house",
   // collection: "collection",
   // infoCircle: "info-circle",
   // transparency: "transparency",
@@ -13,6 +14,7 @@ export const symbols = {
   // toggles2: "toggles2",
   // pencilFill: "pencil-fill",
   sliders: "sliders",
+  chartFill: "chart-fill",
   menu: "menu",
   // calendar3: "calendar3",
   gearFill: "gear-fill",
