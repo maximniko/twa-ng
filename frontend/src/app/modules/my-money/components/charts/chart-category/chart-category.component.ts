@@ -10,14 +10,14 @@ import {Transaction} from "../../../domains/transactions/interfaces/transaction"
 import {TransactionsService} from "../../../domains/transactions/services/transactions.service";
 import {TransactionsFilter} from "../../../domains/transactions/services/transactions-filter";
 import {DoughnutComponent} from "../_includes/chart-transactions/chart/doughnut.component";
-import {ListComponent} from "../_includes/chart-transactions/list/list.component";
 import {debounceTime, Subscription} from "rxjs";
 import {FromTo} from "../../../domains/charts/interfaces/from-to";
 import {FilterService} from "../../../domains/charts/services/filter.service";
+import {TransactionsListComponent} from "../../transactions/_includes/list/transactions-list.component";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, DoughnutComponent, ListComponent, PaginationComponent, SelectorComponent],
+  imports: [CommonModule, DoughnutComponent, PaginationComponent, SelectorComponent, TransactionsListComponent],
   templateUrl: './chart-category.component.html',
   host: {class: 'd-flex flex-column h-100'},
 })
@@ -66,7 +66,7 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.router.navigate([routeCreator.main()])
+    this.router.navigate([routeCreator.chart()])
   }
 
   onMainClick() {
