@@ -9,6 +9,7 @@ const ROUTE_PARTS = {
   myMoney: 'my-money',
   main: 'main',
   categories: 'categories',
+  chart: 'chart',
   chartCategory: 'chart-category',
   transactions: 'transactions',
   settings: 'settings',
@@ -17,6 +18,7 @@ const ROUTE_PARTS = {
 export const routeCreator = {
   main: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.main}`,
   settings: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.settings}`,
+  chart: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.chart}`,
   categories: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}`,
   categoriesAdd: () => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.categories}/add`,
   chartCategory: (category: Category) => `/${ROUTE_PARTS.myMoney}/${ROUTE_PARTS.chartCategory}/${category.id}`,
@@ -34,6 +36,10 @@ export const myMoneyRoutes: Routes = [
       {path: '', redirectTo: routeCreator.main(), pathMatch: 'full'},
       {
         path: `${ROUTE_PARTS.main}`,
+        loadComponent: () => import('./components/main/main.component').then(mod => mod.MainComponent)
+      },
+      {
+        path: `${ROUTE_PARTS.chart}`,
         loadComponent: () => import('./components/charts/main/main.component').then(mod => mod.MainComponent)
       },
       {

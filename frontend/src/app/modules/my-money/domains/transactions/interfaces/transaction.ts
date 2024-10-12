@@ -35,7 +35,7 @@ export function transactionGenerator(id: number): Transaction {
     id: id,
     category: categoryGenerator(id % CATEGORY_MAX_ID + 1),
     tag: dummyTags[getRandomInt(TRANSACTION_MAX_TAG_ID - 1)],
-    total: getRandomInt(id * 10000),
+    total: getRandomInt(id * 100),
     date: new Date(Date.now()),
   }
 }

@@ -57,9 +57,10 @@ a, .link {
   justify-content: end;
 }
 
-//.bg-secondary {
-//  background: var(--tg-theme-secondary-bg-color);
-//}
+.tg-bg-secondary {
+  //background: red;
+  background: var(--tg-theme-secondary-bg-color);
+}
 
 .tg-btn {
   background: var(--tg-theme-button-color);
