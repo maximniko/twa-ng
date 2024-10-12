@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, Location} from '@angular/common';
 import {Router} from "@angular/router";
 import {routeCreator} from "../../../my-money.routes";
 import {TwaService} from "../../../../../common/services/twa.service";
@@ -30,6 +30,7 @@ export class MainComponent implements OnInit, OnDestroy {
     protected twa: TwaService,
     protected filter: FilterService,
     protected localisation: Localisation,
+    protected location: Location,
     protected service: ChartCategoriesService,
     protected router: Router
   ) {
@@ -42,7 +43,7 @@ export class MainComponent implements OnInit, OnDestroy {
       .pipe(debounceTime(1000))
       .subscribe((fromTo: FromTo) => this.loadChartCategories(fromTo))
 
-    this.twa.visibleBackButton(false)
+    this.twa.backButtonOnClick(() => this.goBack())
     this.twa.setMainButton(
       {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
       () => this.onMainClick()
@@ -51,7 +52,12 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.twa.offMainButton(() => this.onMainClick())
+    this.twa.offBackButton(() => this.goBack())
     this.filterSubscription?.unsubscribe()
+  }
+
+  goBack() {
+    this.location.back()
   }
 
   onMainClick() {

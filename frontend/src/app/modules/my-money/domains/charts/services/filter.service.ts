@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {clone} from "chart.js/helpers";
 import {Subject} from "rxjs";
-import {FromTo} from "../interfaces/from-to";
+import {FromTo, fromToByMonth, fromToByWeek} from "../interfaces/from-to";
 import {getDaysInMonth, getWeeksInMonth} from "../../../../../common/extensions/Date";
 
 @Injectable({providedIn: 'root'})
@@ -47,27 +47,19 @@ export class FilterService {
   }
 
   get fromTo(): FromTo {
-    const from = new Date()
-    const to = new Date()
-
     switch (this.period) {
       case Period.day:
+        const from = new Date(), to = new Date()
         from.setDate(from.getDate() - this.page - 1)
         to.setDate(to.getDate() - this.page)
-        break
+        return {
+          from: from,
+          to: to,
+        }
       case Period.week:
-        from.setDate(from.getDate() - this.page * 7 - 7)
-        to.setDate(to.getDate() - this.page * 7)
-        break
+        return fromToByWeek(this.page)
       case Period.month:
-        from.setMonth(from.getMonth() - this.page - 1)
-        to.setMonth(to.getMonth() - this.page)
-        break
-    }
-
-    return {
-      from: from,
-      to: to,
+        return fromToByMonth(this.page)
     }
   }
 
@@ -110,7 +102,7 @@ export class FilterService {
   }
 
   get coefficient(): number {
-    switch (this.period){
+    switch (this.period) {
       case Period.day:
         return 1 / getDaysInMonth()
       case Period.week:

@@ -4,11 +4,11 @@
       <use [attr.xlink:href]="'#' + symbols.menu"/>
     </svg>
   </button>
-  <a class="navbar-toggler p-2 hstack" routerLink="{{routeCreator.chart()}}">
+  <a class="navbar-toggler color-accent p-2 hstack accent-border accent-bg-shadow-bottom-left rounded-5" routerLink="{{routeCreator.chart()}}">
     <span class="pe-3">
-    <svg class="bi">
-      <use [attr.xlink:href]="'#' + symbols.chartFill"/>
-    </svg>
+      <svg class="bi">
+        <use [attr.xlink:href]="'#' + symbols.chartFill"/>
+      </svg>
     </span>
     <div class="m-auto">Chart</div>
   </a>
