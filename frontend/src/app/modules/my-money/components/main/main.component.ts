@@ -13,15 +13,16 @@ import {TransactionsListComponent} from "../transactions/_includes/list/transact
 import {TransactionsService} from "../../domains/transactions/services/transactions.service";
 import {TransactionsFilter} from "../../domains/transactions/services/transactions-filter";
 import {Transaction} from "../../domains/transactions/interfaces/transaction";
+import {AvailableComponent} from "./available/available.component";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TransactionsListComponent, SelectorComponent, IntroComponent],
+  imports: [CommonModule, TransactionsListComponent, SelectorComponent, IntroComponent, AvailableComponent],
   templateUrl: './main.component.html',
   host: {class: 'd-flex flex-column h-100'},
 })
 export class MainComponent implements OnInit, OnDestroy {
-  protected transactions: Transaction[] = []
+  protected transactions!: Transaction[]
   protected filterSubscription?: Subscription
 
   constructor(
@@ -57,8 +58,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   private loadTransactions(fromTo: FromTo) {
-    this.service.list(new TransactionsFilter(fromTo))
-      .subscribe(items => this.transactions = items)
+    this.service.list(new TransactionsFilter(fromTo)).subscribe(
+      items => this.transactions = items
+    )
   }
 
   protected readonly routeCreator = routeCreator;

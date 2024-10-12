@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule, Location} from '@angular/common';
 import {ActivatedRoute, Router} from "@angular/router";
 import {TwaService} from "../../../../../common/services/twa.service";
-import {routeCreator} from "../../../my-money.routes";
 import {TransactionInputsComponent} from "../_form/transaction-inputs.component";
 import {FormBuilder, FormControlStatus, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {FormTransaction, Transaction} from "../../../domains/transactions/interfaces/transaction";

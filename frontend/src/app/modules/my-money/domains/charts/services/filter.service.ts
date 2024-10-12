@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {clone} from "chart.js/helpers";
 import {Subject} from "rxjs";
 import {FromTo} from "../interfaces/from-to";
+import {getDaysInMonth, getWeeksInMonth} from "../../../../../common/extensions/Date";
 
 @Injectable({providedIn: 'root'})
 export class FilterService {
@@ -106,6 +107,17 @@ export class FilterService {
 
   isFirstPage(): boolean {
     return this.page < 1
+  }
+
+  get coefficient(): number {
+    switch (this.period){
+      case Period.day:
+        return 1 / getDaysInMonth()
+      case Period.week:
+        return 1 / getWeeksInMonth()
+      case Period.month:
+        return 1
+    }
   }
 }
 

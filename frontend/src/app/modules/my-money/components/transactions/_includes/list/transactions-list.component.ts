@@ -3,10 +3,10 @@ import {CommonModule} from '@angular/common';
 import {RouterLink} from "@angular/router";
 import {routeCreator} from "../../../../my-money.routes";
 import {symbols} from "../../../../../../common/components/symbols/symbols";
-import {Transaction} from "../../../../domains/transactions/interfaces/transaction";
 import {getColor} from "../../../../../../common/interfaces/colors";
 import {toLocalDate} from "../../../../../../common/extensions/Date";
 import {TwaService} from "../../../../../../common/services/twa.service";
+import {Transaction} from "../../../../domains/transactions/interfaces/transaction";
 
 @Component({
   selector: 'transactions-list',
@@ -15,8 +15,7 @@ import {TwaService} from "../../../../../../common/services/twa.service";
   templateUrl: './transactions-list.component.html',
 })
 export class TransactionsListComponent {
-  @Input() transactions: Transaction[] = []
-
+  @Input() transactions!: Transaction[]
   constructor(private twa: TwaService) {
   }
 

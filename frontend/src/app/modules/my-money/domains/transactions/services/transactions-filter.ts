@@ -2,6 +2,7 @@ import {HttpParams} from "@angular/common/http";
 import {HttpParamsOptionsFromObject} from "../../../../../common/components/filters/interfaces/filter-interface";
 import {Transaction} from "../interfaces/transaction";
 import {toParamDate} from "../../../../../common/extensions/Date";
+import {getRandomInt} from "../../../../../common/extensions/Number";
 
 export class TransactionsFilter {
   constructor(private params: {
@@ -39,6 +40,6 @@ export class TransactionsFilter {
       return item.category.id == this.params.categoryId
     }
 
-    return this.params.categoryId == undefined
+    return getRandomInt(5) == 1
   }
 }
