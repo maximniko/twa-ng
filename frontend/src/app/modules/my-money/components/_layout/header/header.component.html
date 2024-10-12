@@ -4,7 +4,14 @@
       <use [attr.xlink:href]="'#' + symbols.menu"/>
     </svg>
   </button>
-  <a class="btn btn-outline-primary rounded-5">Chart</a>
+  <a class="navbar-toggler p-2 hstack" routerLink="{{routeCreator.chart()}}">
+    <span class="pe-3">
+    <svg class="bi">
+      <use [attr.xlink:href]="'#' + symbols.chartFill"/>
+    </svg>
+    </span>
+    <div class="m-auto">Chart</div>
+  </a>
 </header>
 
 <ng-template #content let-offcanvas>
@@ -13,14 +20,37 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
   </div>
   <div class="offcanvas-body">
-    <a class="btn" routerLink="{{routeCreator.settings()}}">
-      <svg class="bi">
-        <use [attr.xlink:href]="'#' + symbols.sliders"/>
-      </svg>
-      Setting
-    </a>
-    <div class="text-end">
-      <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('Save click')">Save</button>
-    </div>
+    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+      <li class="nav-item text-center">
+        <a class="nav-link" (click)="offcanvas.dismiss('Cross click')" routerLink="{{routeCreator.main()}}">
+          <span class="pe-3">
+            <svg class="bi">
+              <use [attr.xlink:href]="'#' + symbols.house"/>
+            </svg>
+          </span>
+          Home
+        </a>
+      </li>
+      <li class="nav-item text-center">
+        <a class="nav-link" (click)="offcanvas.dismiss('Cross click')" routerLink="{{routeCreator.settings()}}">
+          <span class="pe-3">
+            <svg class="bi">
+              <use [attr.xlink:href]="'#' + symbols.sliders"/>
+            </svg>
+          </span>
+          Setting
+        </a>
+      </li>
+      <li class="nav-item text-center">
+        <a class="nav-link" (click)="offcanvas.dismiss('Cross click')" routerLink="{{routeCreator.chart()}}">
+          <span class="pe-3">
+            <svg class="bi">
+              <use [attr.xlink:href]="'#' + symbols.chartFill"/>
+            </svg>
+          </span>
+          Chart
+        </a>
+      </li>
+    </ul>
   </div>
 </ng-template>

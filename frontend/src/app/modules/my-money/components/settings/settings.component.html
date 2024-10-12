@@ -1,3 +1,14 @@
-<section>
-
+<section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
+  <form [formGroup]="settingForm" (ngSubmit)="save()" class="p-3">
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" placeholder="Total" id="form-total" formControlName="maxPerMonth" [ngClass]="{
+            'is-invalid': isInvalidMaxPerMonth,
+            'is-valid': settingForm.valid,
+          }">
+      <label for="form-total">Total</label>
+      <div class="invalid-feedback" *ngIf="isInvalidMaxPerMonth">
+        {{ validationErrors(maxPerMonthErrors, 'Total') }}
+      </div>
+    </div>
+  </form>
 </section>
