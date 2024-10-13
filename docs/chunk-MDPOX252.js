@@ -1,1 +1,0 @@
-import{F as e}from"./chunk-DIXJAQJD.js";var n=(()=>{class t{item(){return{maxPerMonth:2310125}}save(r){}static{this.\u0275fac=function(o){return new(o||t)}}static{this.\u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{n as a};
