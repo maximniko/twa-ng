@@ -3,6 +3,7 @@ import {clone} from "chart.js/helpers";
 import {Subject} from "rxjs";
 import {FromTo, fromToByMonth, fromToByWeek} from "../interfaces/from-to";
 import {getDaysInMonth, getWeeksInMonth} from "../../../../../common/extensions/Date";
+import {TwaService} from "../../../../../common/services/twa.service";
 
 @Injectable({providedIn: 'root'})
 export class FilterService {
@@ -12,6 +13,9 @@ export class FilterService {
   public _period: Period = Period.day;
   public get period() {
     return this._period
+  }
+
+  constructor(private twa: TwaService) {
   }
 
   resetPage() {
@@ -74,23 +78,14 @@ export class FilterService {
   }
 
   label(date: Date): string {
-    if (this.page > 0) {
-      if (this.period === Period.day) {
-        const f = (clone(this.format))
-        f.weekday = 'short'
-        return date.toLocaleDateString('ru-RU', f);
-      }
-      return date.toLocaleDateString('ru-RU', this.format);
-    }
+    const lang = this.twa.getUserLanguageCode() ?? 'en'
 
-    switch (this.period) {
-      case Period.day:
-        return 'Today';
-      case Period.week:
-        return 'This week';
-      case Period.month:
-        return 'This month';
+    if (this.period === Period.day) {
+      const f = (clone(this.format))
+      f.weekday = 'short'
+      return date.toLocaleDateString(lang, f);
     }
+    return date.toLocaleDateString(lang, this.format);
   }
 
   isLastPage(): boolean {
