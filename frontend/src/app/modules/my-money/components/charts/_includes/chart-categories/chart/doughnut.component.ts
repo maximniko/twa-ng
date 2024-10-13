@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {BaseChartDirective} from "ng2-charts";
 import {ChartConfiguration, Color} from "chart.js";
 import {ChartCategory} from "../../../../../domains/charts/interfaces/chart-category";
+import {Localisation} from "../../../../../../../common/services/localisation";
 
 @Component({
   selector: 'chart-categories-doughnut',
@@ -39,6 +40,10 @@ export class DoughnutComponent implements OnInit {
     responsive: true,
   };
 
+  constructor(
+    protected localisation: Localisation,
+  ) {
+  }
   ngOnInit() {
     this.initChartData()
   }
@@ -52,7 +57,7 @@ export class DoughnutComponent implements OnInit {
           acc.backgroundColors.push(value.color)
           acc.data.push(value.total)
         } else {
-          acc.labels[maxIndex] = 'Others'
+          acc.labels[maxIndex] = this.localisation.t.Others ?? 'Others'
           acc.backgroundColors.push('#999')
           acc.data[maxIndex] = (acc.data[maxIndex] ?? 0) + value.total
         }
@@ -66,7 +71,7 @@ export class DoughnutComponent implements OnInit {
     this.doughnutChartLabels.push(...chartData.labels)
     this.doughnutChartDatasets.push({
         data: chartData.data,
-        label: 'sum',
+        label: this.localisation.t.sum ?? 'sum',
         borderWidth: 1,
         // borderJoinStyle: 'round',
         backgroundColor: chartData.backgroundColors,

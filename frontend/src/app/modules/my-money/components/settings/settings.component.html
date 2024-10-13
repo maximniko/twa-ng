@@ -1,13 +1,21 @@
 <section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
+  <div class="hstack p-3 pb-0 color-accent">
+    <span class="m-auto text-center h5">{{ localisation.t.Settings ?? 'Settings' }}</span>
+    <div class="p-2 px-4">
+      <svg class="bi" style="width: 2rem;height: 2rem">
+        <use [attr.xlink:href]="'#' + symbols.gearFill"/>
+      </svg>
+    </div>
+  </div>
   <form [formGroup]="settingForm" (ngSubmit)="save()" class="p-3">
     <div class="form-floating mb-3">
-      <input type="number" class="form-control" placeholder="Total" id="form-total" formControlName="maxPerMonth" [ngClass]="{
+      <input type="number" class="form-control" placeholder="{{ localisation.t.MaxPerMonth ?? 'Max per month' }}" id="form-total" formControlName="maxPerMonth" [ngClass]="{
             'is-invalid': isInvalidMaxPerMonth,
             'is-valid': settingForm.valid,
           }">
-      <label for="form-total">Total</label>
+      <label for="form-total">{{ localisation.t.MaxPerMonth ?? 'Max per month' }}</label>
       <div class="invalid-feedback" *ngIf="isInvalidMaxPerMonth">
-        {{ validationErrors(maxPerMonthErrors, 'Total') }}
+        {{ validationErrors(maxPerMonthErrors, localisation.t.MaxPerMonth ?? 'Max per month') }}
       </div>
     </div>
   </form>

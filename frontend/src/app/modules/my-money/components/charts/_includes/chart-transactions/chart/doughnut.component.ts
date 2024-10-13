@@ -4,6 +4,7 @@ import {BaseChartDirective} from "ng2-charts";
 import {ChartConfiguration, Color} from "chart.js";
 import {Transaction} from "../../../../../domains/transactions/interfaces/transaction";
 import {getColor} from "../../../../../../../common/interfaces/colors";
+import {Localisation} from "../../../../../../../common/services/localisation";
 
 @Component({
   selector: 'chart-transactions-doughnut',
@@ -40,6 +41,10 @@ export class DoughnutComponent implements OnInit {
     responsive: true,
   };
 
+  constructor(
+    protected localisation: Localisation,
+  ) {
+  }
   ngOnInit() {
     this.initChartData()
   }
@@ -49,7 +54,7 @@ export class DoughnutComponent implements OnInit {
     this.doughnutChartLabels.push(...chartDate.labels)
     this.doughnutChartDatasets.push({
         data: chartDate.data,
-        label: 'sum',
+        label: this.localisation.t.sum ?? 'sum',
         borderWidth: 1,
         backgroundColor: chartDate.backgroundColors,
       }
