@@ -1,19 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule, Location} from '@angular/common';
-import {RouterLink, RouterLinkActive} from "@angular/router";
 import {routeCreator} from "../../my-money.routes";
 import {FormBuilder, FormControlStatus, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TwaService} from "../../../../common/services/twa.service";
 import {Subscription} from "rxjs";
-import {FormTransaction} from "../../domains/transactions/interfaces/transaction";
 import {Setting} from "../../domains/setting/interface/setting";
 import {SettingsService} from "../../domains/setting/services/settings.service";
 import {ReactiveForm} from "../../../../common/components/reactive-form.component";
-import {DateInputComponent} from "../transactions/_form/components/date-input.component";
+import {symbols} from "../../../../common/components/symbols/symbols";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DateInputComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './settings.component.html',
 })
 export class SettingsComponent extends ReactiveForm implements OnInit, OnDestroy {
@@ -41,7 +39,7 @@ export class SettingsComponent extends ReactiveForm implements OnInit, OnDestroy
       .subscribe((status: FormControlStatus) => this.twa.mainButtonIsActive(status == "VALID"))
     this.twa.backButtonOnClick(() => this.goBack())
     this.twa.setMainButton(
-      {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
+      {text: this.localisation.t.Save ?? 'Save', is_visible: true, is_active: true, has_shine_effect: true},
       () => this.save(),
     )
 
@@ -80,4 +78,5 @@ export class SettingsComponent extends ReactiveForm implements OnInit, OnDestroy
   }
 
   protected readonly routeCreator = routeCreator;
+  protected readonly symbols = symbols;
 }

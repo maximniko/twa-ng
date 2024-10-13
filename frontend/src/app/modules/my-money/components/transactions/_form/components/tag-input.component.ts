@@ -19,16 +19,16 @@ import {Transaction} from "../../../../domains/transactions/interfaces/transacti
   imports: [CommonModule, ReactiveFormsModule, NgbTypeahead],
   template: `
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" placeholder="Title" id="form-tag" formControlName="tag"
+      <input type="text" class="form-control" placeholder="{{localisation.t.Title ?? 'Title'}}" id="form-tag" formControlName="tag"
              [focusFirst]="true"
              [ngbTypeahead]="search"
              [ngClass]="{
             'is-invalid': isInvalidTag,
             'is-valid': parentForm.valid,
           }">
-      <label for="form-tag">Title</label>
+      <label for="form-tag">{{ localisation.t.Title ?? 'Title' }}</label>
       <div class="invalid-feedback" *ngIf="isInvalidTag">
-        {{ validationErrors(tagErrors, 'Title') }}
+        {{ validationErrors(tagErrors, localisation.t.Title ?? 'Title') }}
       </div>
     </div>`,
   viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]

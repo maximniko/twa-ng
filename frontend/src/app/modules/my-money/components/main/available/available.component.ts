@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {Transaction} from "../../../domains/transactions/interfaces/transaction";
 import {FilterService} from "../../../domains/charts/services/filter.service";
 import {SettingsService} from "../../../domains/setting/services/settings.service";
+import {Localisation} from "../../../../../common/services/localisation";
 
 @Component({
   selector: 'main-available',
@@ -24,8 +25,8 @@ import {SettingsService} from "../../../domains/setting/services/settings.servic
         </div>
       </div>
       <div class="jcb pt-3">
-        <div>Потрачено: {{ available.valuenow | number: '1.1-1' }}</div>
-        <div>Доступно: {{ available.valuemax - available.valuenow | number: '1.1-1' }}</div>
+        <div>{{ localisation.t.Spent }}: {{ available.valuenow | number: '1.1-1' }}</div>
+        <div>{{ localisation.t.Available }}: {{ available.valuemax - available.valuenow | number: '1.1-1' }}</div>
       </div>
     </div>
   `,
@@ -40,6 +41,7 @@ export class AvailableComponent implements OnInit, OnChanges {
   }
 
   constructor(
+    protected localisation: Localisation,
     protected settings: SettingsService,
     protected filter: FilterService,
   ) {

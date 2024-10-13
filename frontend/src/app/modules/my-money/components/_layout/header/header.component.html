@@ -10,13 +10,13 @@
         <use [attr.xlink:href]="'#' + symbols.chartFill"/>
       </svg>
     </span>
-    <div class="m-auto">Chart</div>
+    <div class="m-auto">{{ localisation.t.Chart ?? 'Chart' }}</div>
   </a>
 </header>
 
 <ng-template #content let-offcanvas>
   <div class="offcanvas-header">
-    <h4 class="offcanvas-title" id="offcanvas-basic-title">Menu</h4>
+    <h4 class="offcanvas-title" id="offcanvas-basic-title">{{ localisation.t.Menu ?? 'Menu' }}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
   </div>
   <div class="offcanvas-body">
@@ -28,7 +28,7 @@
               <use [attr.xlink:href]="'#' + symbols.house"/>
             </svg>
           </span>
-          Home
+          {{ localisation.t.Home ?? 'Home' }}
         </a>
       </li>
       <li class="nav-item text-center">
@@ -38,7 +38,7 @@
               <use [attr.xlink:href]="'#' + symbols.sliders"/>
             </svg>
           </span>
-          Setting
+          {{ localisation.t.Setting ?? 'Setting' }}
         </a>
       </li>
       <li class="nav-item text-center">
@@ -48,7 +48,7 @@
               <use [attr.xlink:href]="'#' + symbols.chartFill"/>
             </svg>
           </span>
-          Chart
+          {{ localisation.t.Chart ?? 'Chart' }}
         </a>
       </li>
     </ul>

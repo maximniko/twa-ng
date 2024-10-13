@@ -10,7 +10,7 @@
             <div class="col-auto">{{ toLocalDate(transaction.date) }}</div>
           </div>
           <div class="jcb">
-            <div>Sum:</div>
+            <div>{{ localisation.t.sum ?? 'sum' }}:</div>
             <div>{{ transaction.total }}</div>
           </div>
         </div>

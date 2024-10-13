@@ -25,7 +25,7 @@ import {DateValidator} from "../../../../../../common/extensions/Validators";
       <input
         id="form-date"
         class="form-control"
-        placeholder="yyyy-mm-dd"
+        placeholder="{{localisation.t.Date ?? 'Date'}}"
         formControlName="date"
         ngbDatepicker
         (click)="d.toggle()"
@@ -35,9 +35,9 @@ import {DateValidator} from "../../../../../../common/extensions/Validators";
             'is-valid': parentForm.valid,
           }"
       />
-      <label for="form-date">Date</label>
+      <label for="form-date">{{ localisation.t.Date ?? 'Date' }}</label>
       <div class="invalid-feedback" *ngIf="isInvalidDate">
-        {{ validationErrors(dateErrors, 'Date') }}
+        {{ validationErrors(dateErrors, localisation.t.Date ?? 'Date') }}
       </div>
     </div>`,
   viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]

@@ -14,6 +14,7 @@ import {debounceTime, Subscription} from "rxjs";
 import {FromTo} from "../../../domains/charts/interfaces/from-to";
 import {FilterService} from "../../../domains/charts/services/filter.service";
 import {TransactionsListComponent} from "../../transactions/_includes/list/transactions-list.component";
+import {Localisation} from "../../../../../common/services/localisation";
 
 @Component({
   standalone: true,
@@ -33,6 +34,7 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
     protected filter: FilterService,
     protected service: TransactionsService,
     protected activatedRoute: ActivatedRoute,
+    protected localisation: Localisation,
     protected router: Router
   ) {
     this.activatedRoute.data
@@ -49,7 +51,7 @@ export class ChartCategoryComponent implements OnInit, OnDestroy {
 
     this.twa.backButtonOnClick(() => this.goBack())
     this.twa.setMainButton(
-      {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
+      {text: this.localisation.t.Add ?? 'Add', is_active: true, is_visible: true, has_shine_effect: true},
       () => this.onMainClick(),
     )
   }

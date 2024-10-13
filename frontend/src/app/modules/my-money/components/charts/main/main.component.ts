@@ -45,7 +45,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
     this.twa.backButtonOnClick(() => this.goBack())
     this.twa.setMainButton(
-      {text: 'Add transaction', is_active: true, is_visible: true, has_shine_effect: true},
+      {text: this.localisation.t.Add ?? 'Add', is_active: true, is_visible: true, has_shine_effect: true},
       () => this.onMainClick()
     )
   }

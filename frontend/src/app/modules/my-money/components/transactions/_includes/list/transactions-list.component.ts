@@ -7,6 +7,7 @@ import {getColor} from "../../../../../../common/interfaces/colors";
 import {toLocalDate} from "../../../../../../common/extensions/Date";
 import {TwaService} from "../../../../../../common/services/twa.service";
 import {Transaction} from "../../../../domains/transactions/interfaces/transaction";
+import {Localisation} from "../../../../../../common/services/localisation";
 
 @Component({
   selector: 'transactions-list',
@@ -16,7 +17,10 @@ import {Transaction} from "../../../../domains/transactions/interfaces/transacti
 })
 export class TransactionsListComponent {
   @Input() transactions!: Transaction[]
-  constructor(private twa: TwaService) {
+  constructor(
+    private twa: TwaService,
+    protected localisation: Localisation,
+  ) {
   }
 
   protected readonly routeCreator = routeCreator;
