@@ -70,7 +70,10 @@ export class FilterService {
   public getPeriodString(): string {
     const fromTo = this.fromTo;
 
-    if (this.page === 0 || this.period == Period.day) {
+    if (this.period == Period.day
+      || fromTo.from.getDay() == 1 && this.period == Period.week
+      || fromTo.from.getDate() == 1 && this.period == Period.month
+    ) {
       return this.label(fromTo.to)
     }
 
