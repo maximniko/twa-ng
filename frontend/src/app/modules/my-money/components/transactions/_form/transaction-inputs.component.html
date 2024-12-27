@@ -1,0 +1,26 @@
+<div class="form-floating mb-3">
+  <select type="text" class="form-select" id="form-category" formControlName="category" [ngClass]="{
+            'is-invalid': isInvalidCategory,
+            'is-valid': parentForm.valid,
+          }" [compareWith]="compareCategory">
+    @for(category of categoriesList; track category.id) {
+      <option [ngValue]="category">{{ category.title }}</option>
+    }
+  </select>
+  <label for="form-category">{{ localisation.t.Category ?? 'Category' }}</label>
+  <div class="invalid-feedback" *ngIf="isInvalidCategory">
+    {{ validationErrors(categoryErrors, localisation.t.Category ?? 'Category') }}
+  </div>
+</div>
+<transaction-tag-input [transactionItem]="transactionItem" [parentForm]="parentForm"></transaction-tag-input>
+<div class="form-floating mb-3">
+  <input type="number" class="form-control" placeholder="{{ localisation.t.Total ?? 'Total' }}" id="form-total" formControlName="total" [ngClass]="{
+            'is-invalid': isInvalidTotal,
+            'is-valid': parentForm.valid,
+          }">
+  <label for="form-total">{{ localisation.t.Total ?? 'Total' }}</label>
+  <div class="invalid-feedback" *ngIf="isInvalidTotal">
+    {{ validationErrors(totalErrors, localisation.t.Total ?? 'Total') }}
+  </div>
+</div>
+<transaction-date-input [transactionItem]="transactionItem" [parentForm]="parentForm"></transaction-date-input>

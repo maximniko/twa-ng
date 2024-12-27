@@ -10,7 +10,6 @@ import {
   Validators
 } from "@angular/forms";
 import {Category} from "../../../domains/categories/interfaces/category";
-import {InValidator} from "../../../../../common/extensions/Validators";
 
 @Component({
   selector: 'category-inputs',
@@ -28,16 +27,10 @@ export class CategoryInputsComponent extends ReactiveForm implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Category item ngOnInit", this.categoryItem)
-    console.log("parent form ngOnInit", this.parentForm)
     this.parentForm.addControl('title', this.formBuilder.control(this.categoryItem?.title ?? '', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(32),
-    ]))
-    this.parentForm.addControl('icon', this.formBuilder.control(this.categoryItem?.icon ?? '', [
-      Validators.required,
-      InValidator(["building"])
     ]))
     this.parentForm.addControl('description', this.formBuilder.control(this.categoryItem?.description.slice(0, 255) ?? '', [
       Validators.minLength(3),
@@ -47,10 +40,6 @@ export class CategoryInputsComponent extends ReactiveForm implements OnInit {
 
   private get title() {
     return this.parentForm.get('title');
-  }
-
-  private get icon() {
-    return this.parentForm.get('icon');
   }
 
   private get description() {
@@ -63,14 +52,6 @@ export class CategoryInputsComponent extends ReactiveForm implements OnInit {
 
   get isInvalidTitle(): boolean | undefined {
     return this.isInvalid(this.title)
-  }
-
-  get iconErrors() {
-    return this.errors(this.icon);
-  }
-
-  get isInvalidIcon(): boolean | undefined {
-    return this.isInvalid(this.icon)
   }
 
   get descriptionErrors() {

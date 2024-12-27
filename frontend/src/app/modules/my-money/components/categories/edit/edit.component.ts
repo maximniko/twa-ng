@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from "@angular/router";
-import {symbols} from "../../../../../common/components/symbols/symbols";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {routeCreator} from "../../../my-money.routes";
 import {CategoryInputsComponent} from "../_form/category-inputs.component";
 import {Category} from "../../../domains/categories/interfaces/category";
 import {CategoriesService} from "../../../domains/categories/services/categories.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {Subscription} from "rxjs";
 
 @Component({
   standalone: true,
@@ -27,10 +27,14 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   protected categoryForm: FormGroup = this.formBuilder.group({})
+  protected serviceSubscription?: Subscription
 
   ngOnInit() {
-    this.twa.backButton(() => this.router.navigate([routeCreator.categoryViewId(this.categoryItem)]))
-    this.twa.setMainButton({text: 'Edit', is_visible: true, is_active: true}, this.submit)
+    this.twa.backButtonOnClick(() => this.router.navigate([routeCreator.chartCategory(this.categoryItem)]))
+    this.twa.setMainButton(
+      {text: 'Save', is_visible: true, is_active: true, has_shine_effect: true},
+      () => this.submit(),
+    )
 
     this.activatedRoute.data
       .subscribe((data: any) => this.categoryItem = data.categoryItem)
@@ -42,14 +46,13 @@ export class EditComponent implements OnInit, OnDestroy {
     }
 
     const newCategory: Category = this.categoryForm.value
-    this.service.edit(newCategory).subscribe(
-      (category: Category) => this.router.navigate([routeCreator.categoryViewId(category)])
+    this.serviceSubscription = this.service.edit(Object.assign(this.categoryItem, newCategory)).subscribe(
+      (category: Category) => this.router.navigate([routeCreator.chartCategory(category)])
     )
   }
 
   ngOnDestroy(): void {
     this.twa.visibleMainButton(false)
+    this.serviceSubscription?.unsubscribe()
   }
-
-  protected readonly symbols = symbols;
 }

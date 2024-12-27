@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Router, RouterLink} from "@angular/router";
-import {symbols} from "../../../../../common/components/symbols/symbols";
+import {Router} from "@angular/router";
 import {TwaService} from "../../../../../common/services/twa.service";
 import {routeCreator} from "../../../my-money.routes";
 import {ReactiveForm} from "../../../../../common/components/reactive-form.component";
@@ -9,6 +8,7 @@ import {CategoryInputsComponent} from "../_form/category-inputs.component";
 import {Category} from "../../../domains/categories/interfaces/category";
 import {CategoriesService} from "../../../domains/categories/services/categories.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {Subscription} from "rxjs";
 
 @Component({
   standalone: true,
@@ -26,14 +26,17 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
   }
 
   protected categoryForm: FormGroup = this.formBuilder.group({})
+  protected serviceSubscription?: Subscription
 
   ngOnInit() {
-    this.twa.backButton(() => this.router.navigate([routeCreator.categories()]))
-    this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, this.submit)
+    this.twa.backButtonOnClick(() => this.router.navigate([routeCreator.categories()]))
+    this.twa.setMainButton({text: 'Add', is_active: true, is_visible: true}, () => this.submit())
   }
 
   ngOnDestroy(): void {
     this.twa.visibleMainButton(false)
+    this.serviceSubscription?.unsubscribe()
+    // this.twa.setMainButtonOffClick(this.submit)
   }
 
   submit() {
@@ -42,10 +45,8 @@ export class AddComponent extends ReactiveForm implements OnInit, OnDestroy {
     }
 
     const newCategory: Category = this.categoryForm.value
-    this.service.create(newCategory).subscribe(
-      (category: Category) => this.router.navigate([routeCreator.categoryViewId(category)])
+    this.serviceSubscription = this.service.create(newCategory).subscribe(
+      (category: Category) => this.router.navigate([routeCreator.chartCategory(category)])
     )
   }
-
-  protected readonly symbols = symbols;
 }

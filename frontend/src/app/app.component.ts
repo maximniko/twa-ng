@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { TwaComponent } from "./components/twa/twa.component";
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TwaComponent],
-  template: '<router-outlet />'
+  imports: [RouterOutlet],
+  template: '<router-outlet />',
+  host: {class: 'h-100'}
 })
 
 export class AppComponent {

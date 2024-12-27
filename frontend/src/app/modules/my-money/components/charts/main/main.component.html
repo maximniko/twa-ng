@@ -1,0 +1,19 @@
+@if (chartCategories.length) {
+  <section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
+    <div class="hstack p-3 pb-0">
+      <span class="m-auto text-center h5">{{ localisation.t.Calculations ?? 'Calculations' }}</span>
+      <period-selector></period-selector>
+    </div>
+    <div class="card-body p-2">
+      <chart-categories-doughnut [chartCategories]="chartCategories"></chart-categories-doughnut>
+    </div>
+    <div class="card-body p-2">
+      <chart-categories-list [chartCategories]="chartCategories"></chart-categories-list>
+    </div>
+    <period-pagination></period-pagination>
+  </section>
+} @else {
+  <div class="m-auto">
+    <main-intro></main-intro>
+  </div>
+}

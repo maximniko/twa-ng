@@ -6,42 +6,51 @@ import {PopupParams, SecondaryButton} from "@twa-dev/types";
 export class TwaService {
 
   constructor() {
-    WebApp.ready();
-    // WebApp.MainButton.onClick(() => WebApp.showAlert('Main Button was clicked'))
-    // WebApp.MainButton.show()
+    this.initTheme()
   }
 
   getInitData(): string {
     return WebApp.initData
   }
 
+  getUserLanguageCode(): string | undefined {
+    return WebApp.initDataUnsafe.user?.language_code
+  }
+
   setMainButton(params: BottomButtonParams, onClick: VoidFunction) {
+    WebApp.MainButton.offClick(onClick)
     WebApp.MainButton.setParams(params)
     WebApp.MainButton.onClick(onClick)
   }
 
-  setSecondaryButton(params: SecondaryButton) {
+  setSecondaryButton(params: BottomButtonParams & { position?: SecondaryButton["position"] }, onClick: VoidFunction) {
+    WebApp.SecondaryButton.offClick(onClick)
     WebApp.SecondaryButton.setParams(params)
+    WebApp.SecondaryButton.onClick(onClick)
   }
 
-  visibleSettingsButton(show: boolean) {
-    this._buttonVisible(WebApp.SettingsButton, show)
+  offMainButton(offClick: VoidFunction, show: boolean = false) {
+    WebApp.MainButton.offClick(offClick)
+    this.buttonVisible(WebApp.MainButton, show)
   }
 
-  visibleSecondaryButton(show: boolean) {
-    this._buttonVisible(WebApp.SecondaryButton, show)
+  offSecondaryButton(offClick: VoidFunction, show: boolean = true) {
+    WebApp.SecondaryButton.offClick(offClick)
+    this.buttonVisible(WebApp.SecondaryButton, show)
+  }
+
+  offBackButton(cb: VoidFunction, show: boolean = true) {
+    WebApp.BackButton.offClick(cb)
+    this.buttonVisible(WebApp.BackButton, show)
   }
 
   visibleBackButton(show: boolean) {
-    this._buttonVisible(WebApp.BackButton, show)
+    this.buttonVisible(WebApp.BackButton, show)
   }
 
-  backButtonShow() {
-    WebApp.BackButton.show()
-  }
-
-  backButton(cb: VoidFunction) {
-    this.backButtonShow()
+  backButtonOnClick(cb: VoidFunction) {
+    WebApp.BackButton.offClick(cb)
+    this.visibleBackButton(true)
     WebApp.BackButton.onClick(cb)
   }
 
@@ -52,9 +61,9 @@ export class TwaService {
   showPopup(params: PopupParams, callback?: (id?: string) => unknown) {
     WebApp.showPopup(params, callback)
     // WebApp.showPopup({
-    //   title: 'Title',
-    //   message: 'Some message',
-    //   buttons: [
+    //   title: 'Title', // 64
+    //   message: 'Some message', // 256
+    //   buttons: [ // 1-3 items
     //     {id: 'link', type: 'default', text: 'Open ton.org'},
     //     {type: 'cancel'},
     //   ]
@@ -66,14 +75,15 @@ export class TwaService {
   }
 
   visibleMainButton(show: boolean) {
-    this._buttonVisible(WebApp.MainButton, show)
+    this.buttonVisible(WebApp.MainButton, show)
   }
 
   mainButtonIsActive(isActive: boolean) {
     isActive ? WebApp.MainButton.enable() : WebApp.MainButton.disable()
+    this.buttonVisible(WebApp.MainButton, isActive)
   }
 
-  private _buttonVisible(button: ButtonVisible, show: boolean) {
+  private buttonVisible(button: ButtonVisible, show: boolean) {
     show ? button.show() : button.hide()
   }
 
@@ -88,6 +98,24 @@ export class TwaService {
   expand(): void {
     WebApp.expand()
   }
+
+  ready(): void {
+    WebApp.ready()
+  }
+
+  initTheme(): void {
+    if (WebApp.colorScheme) {
+      document.documentElement.setAttribute('data-bs-theme', WebApp.colorScheme)
+    }
+    WebApp.onEvent("themeChanged", () => {
+      document.documentElement.setAttribute('data-bs-theme', WebApp.colorScheme)
+    })
+  }
+
+  close(): void {
+    WebApp.close()
+  }
+
 }
 
 type BottomButtonParams = {

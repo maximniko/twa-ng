@@ -1,3 +1,18 @@
-<section>
-  <a [routerLink]="routeCreator.categories()">Categories Link</a>
-</section>
+@if (transactions.length) {
+  <section class="accent-border accent-border-top accent-bg-shadow card rounded-5">
+    <div class="hstack p-3 pb-0">
+      <span class="m-auto text-center h5">{{ localisation.t.Transactions ?? 'Transactions' }}</span>
+      <period-selector></period-selector>
+    </div>
+    <div class="card-body p-2 my-3">
+      <main-available [transactions]="transactions"></main-available>
+    </div>
+    <div class="card-body p-2">
+      <transactions-list [transactions]="transactions"></transactions-list>
+    </div>
+  </section>
+} @else {
+  <div class="m-auto">
+    <main-intro></main-intro>
+  </div>
+}
